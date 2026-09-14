@@ -1,0 +1,71 @@
+backend/
+├─ src/
+│  ├─ config/
+│  │  ├─ env.ts                 # loads & validates env vars (DATABASE_URL, JWT_SECRET, etc.)
+│  │  └─ constants.ts           # roles, request statuses, etc.
+│  │
+│  ├─ db/
+│  │  ├─ schema.ts              # Drizzle schema (all tables + relations)
+│  │  ├─ index.ts               # drizzle client instance (neon-http)
+│  │  └─ seed.ts                # optional: seed subjects, test users
+│  │
+│  ├─ middleware/
+│  │  ├─ auth.middleware.ts     # verifies JWT, attaches req.user
+│  │  ├─ requireRole.middleware.ts   # role guard (teacher/student/admin)
+│  │  ├─ errorHandler.middleware.ts  # centralized error handler
+│  │  └─ validate.middleware.ts # zod schema validation wrapper
+│  │
+│  ├─ modules/
+│  │  ├─ auth/
+│  │  │  ├─ auth.controller.ts
+│  │  │  ├─ auth.routes.ts
+│  │  │  ├─ auth.service.ts
+│  │  │  └─ auth.schema.ts      # zod validation schemas (register/login)
+│  │  │
+│  │  ├─ teachers/
+│  │  │  ├─ teacher.controller.ts
+│  │  │  ├─ teacher.routes.ts
+│  │  │  ├─ teacher.service.ts
+│  │  │  └─ teacher.schema.ts
+│  │  │
+│  │  ├─ students/
+│  │  │  ├─ student.controller.ts
+│  │  │  ├─ student.routes.ts
+│  │  │  ├─ student.service.ts
+│  │  │  └─ student.schema.ts
+│  │  │
+│  │  ├─ subjects/
+│  │  │  ├─ subject.controller.ts
+│  │  │  ├─ subject.routes.ts
+│  │  │  └─ subject.service.ts
+│  │  │
+│  │  ├─ reviews/
+│  │  │  ├─ review.controller.ts
+│  │  │  ├─ review.routes.ts
+│  │  │  ├─ review.service.ts
+│  │  │  └─ review.schema.ts
+│  │  │
+│  │  └─ requests/               # tuition requests / bookings
+│  │     ├─ request.controller.ts
+│  │     ├─ request.routes.ts
+│  │     ├─ request.service.ts
+│  │     └─ request.schema.ts
+│  │
+│  ├─ utils/
+│  │  ├─ jwt.ts                 # sign/verify helpers
+│  │  ├─ hash.ts                # bcrypt/argon2 password hashing
+│  │  ├─ apiResponse.ts         # standard success/error response shape
+│  │  └─ asyncHandler.ts        # wraps controllers to catch async errors
+│  │
+│  ├─ routes/
+│  │  └─ index.ts               # combines all module routes into one router
+│  │
+│  └─ server.ts                 # Express app entry point
+│
+├─ drizzle/                      # auto-generated migration files (drizzle-kit)
+├─ drizzle.config.ts
+├─ .env
+├─ .env.example
+├─ package.json
+├─ tsconfig.json
+└─ README.md

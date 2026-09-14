@@ -1,0 +1,49 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:generate:prod": "cross-env DEPLOY_TARGET=production drizzle-kit generate",
+    "db:migrate:prod": "cross-env DEPLOY_TARGET=production drizzle-kit migrate",
+    "db:studio:prod": "cross-env DEPLOY_TARGET=production drizzle-kit studio",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:seed:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seed.ts",
+    "db:seedAccount": "tsx src/db/seedAccount.ts",
+    "db:seedAccount:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seedAccount.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "agora-access-token": "^2.0.4",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "express": "^5.2.1",
+    "firebase-admin": "^14.4.0",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.20.2",
+    "cross-env": "^10.1.0",
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
