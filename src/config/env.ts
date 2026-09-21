@@ -35,5 +35,5 @@ export const env = {
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
   clientUrls: isProduction
     ? [process.env.CLIENT_URL!]
-    : ["http://localhost:3000", "http://192.168.18.62:3000"],
+    : ["http://localhost:3000", "http://localhost:3001"],
 };

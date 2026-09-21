@@ -1,7 +1,10 @@
 // src/db/schema.ts
 import { pgTable, text, timestamp, uuid, varchar, integer, numeric, boolean, jsonb, uniqueIndex, date } from "drizzle-orm/pg-core";
 
-// ── ADMIN ──────────────────────────────────
+// ────────────────────────────────────────────────────────────
+// ADMIN
+// Platform-level admins (not clinic staff, not doctors).
+// ────────────────────────────────────────────────────────────
 export const admins = pgTable("admins", {
   id: uuid("id").primaryKey().defaultRandom(),
   username: varchar("username", { length: 50 }).notNull().unique(),
@@ -15,6 +18,9 @@ export const admins = pgTable("admins", {
   createdByName: text("created_by_name"),
 });
 
+// Audit trail of admin actions (clinic suspended, doctor created, etc).
+// actorId/actorName/actorRole kept denormalized so logs stay readable
+// even if the acting admin is later deleted.
 export const auditLogs = pgTable("audit_logs", {
   id: uuid("id").primaryKey().defaultRandom(),
   actorId: uuid("actor_id").notNull(),
@@ -30,7 +36,12 @@ export const auditLogs = pgTable("audit_logs", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
-// ── CLINICS (was "users") ──────────────────
+// ────────────────────────────────────────────────────────────
+// CLINICS
+// A clinic is the tenant/account that patients, kiosks, and
+// walk-in flows belong to. Doctors are NOT owned by a clinic —
+// see doctorClinicAssignments below for the many-to-many link.
+// ────────────────────────────────────────────────────────────
 export const clinics = pgTable("clinics", {
   id: uuid("id").primaryKey().defaultRandom(),
   username: varchar("username", { length: 50 }).notNull().unique(),
@@ -45,6 +56,7 @@ export const clinics = pgTable("clinics", {
   createdByAdminId: uuid("created_by_admin_id"),
   createdByName: text("created_by_name"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  isBifurcated: boolean("is_bifurcated").notNull().default(false), 
 
   // merged from pricing + page_permissions (1:1 tables, no reason to split)
   priceVitals: integer("price_vitals").notNull().default(0),
@@ -58,7 +70,11 @@ export const clinics = pgTable("clinics", {
   pagesPharmacy: boolean("pages_pharmacy").notNull().default(true),
 });
 
-// ── PATIENTS (was "all_entries") ───────────
+// ────────────────────────────────────────────────────────────
+// PATIENTS
+// A patient record is scoped to one clinic (walk-in registration).
+// Token/MR number are generated per clinic per day.
+// ────────────────────────────────────────────────────────────
 export const patients = pgTable("patients", {
   id: uuid("id").primaryKey().defaultRandom(),
   clinicId: uuid("clinic_id").notNull().references(() => clinics.id, { onDelete: "cascade" }),
@@ -74,7 +90,6 @@ export const patients = pgTable("patients", {
   province: text("province"),
   city: text("city"),
   stAddress: text("st_address"),
-  languages: text("languages"),
 
   vitalsRecorded: boolean("vitals_recorded").notNull().default(false),
   fcmToken: text("fcm_token"),
@@ -93,6 +108,7 @@ export const patients = pgTable("patients", {
   tokenPerClinicPerDay: uniqueIndex("token_clinic_date_idx").on(t.clinicId, t.token, t.tokenDate),
 }));
 
+// Backing counter used to generate the next daily token number per clinic.
 export const dailyTokenCounters = pgTable("daily_token_counters", {
   id: uuid("id").primaryKey().defaultRandom(),
   clinicId: uuid("clinic_id").notNull().references(() => clinics.id, { onDelete: "cascade" }),
@@ -102,7 +118,12 @@ export const dailyTokenCounters = pgTable("daily_token_counters", {
   uniqueIndex("clinic_date_idx").on(table.clinicId, table.date),
 ]);
 
-// ── VITALS ──────────────────────────────────
+// ────────────────────────────────────────────────────────────
+// VITALS
+// One patient can have multiple vitals records (e.g. repeat visits
+// same day, or online-consult flow). Each vitals record is what a
+// `calls` row and a `prescriptions` row hang off of.
+// ────────────────────────────────────────────────────────────
 export const vitals = pgTable("vitals", {
   id: uuid("id").primaryKey().defaultRandom(),
   patientId: uuid("patient_id").notNull().references(() => patients.id, { onDelete: "cascade" }),
@@ -128,10 +149,14 @@ export const vitals = pgTable("vitals", {
   // NOTE: no roomUrl/roomName/callStatus here anymore — that's all in `calls` now
 });
 
-// ── DOCTORS ─────────────────────────────────
+// ────────────────────────────────────────────────────────────
+// DOCTORS
+// A doctor is independent of any clinic. Which clinics a doctor
+// can serve is controlled entirely by doctorClinicAssignments —
+// there is intentionally no clinicId column on this table.
+// ────────────────────────────────────────────────────────────
 export const doctors = pgTable("doctors", {
   id: uuid("id").primaryKey().defaultRandom(),
-  clinicId: uuid("clinic_id").references(() => clinics.id), // confirm: 1 doctor -> 1 clinic? or need join table for many-to-many
   title: varchar("title", { length: 20 }).notNull(),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
@@ -145,14 +170,29 @@ export const doctors = pgTable("doctors", {
   pmdcNumber: text("pmdc_number"),
   experience: integer("experience").default(0),
   city: text("city"),
-  doctorStatus: text("doctor_status").notNull().default("offline"),
-  status: text("status").notNull().default("Active"),
+  doctorStatus: text("doctor_status").notNull().default("offline"), // online | offline
+  status: text("status").notNull().default("Active"), // account status (Active/Suspended), set by admin
   onCall: boolean("on_call").notNull().default(false),
   fcmToken: text("fcm_token"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
+// Many-to-many link between doctors and clinics.
+// A doctor can be assigned to any number of clinics; a clinic can
+// have any number of assigned doctors. To list doctors available to
+// a clinic: join this table on clinicId. To list clinics a doctor
+// serves: join this table on doctorId.
+export const doctorClinicAssignments = pgTable("doctor_clinic_assignments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  doctorId: uuid("doctor_id").notNull().references(() => doctors.id, { onDelete: "cascade" }),
+  clinicId: uuid("clinic_id").notNull().references(() => clinics.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+}, (t) => ({
+  doctorClinicUnique: uniqueIndex("doctor_clinic_unique_idx").on(t.doctorId, t.clinicId),
+}));
+
+// Login/logout history per doctor (for shift tracking / audit).
 export const doctorSessions = pgTable("doctor_sessions", {
   id: uuid("id").primaryKey().defaultRandom(),
   doctorId: uuid("doctor_id").notNull().references(() => doctors.id, { onDelete: "cascade" }),
@@ -161,13 +201,29 @@ export const doctorSessions = pgTable("doctor_sessions", {
   logoutReason: text("logout_reason"),
 });
 
-// ── CALLS (single source of truth for consult/video state) ──
+// Explicit logout-with-reason events (separate from doctorSessions —
+// this is the "why did you go offline" log shown to admins).
+export const doctorLogs = pgTable("doctor_logs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  doctorId: uuid("doctor_id").notNull().references(() => doctors.id, { onDelete: "cascade" }),
+  action: text("action").notNull().default("logout"),
+  reason: text("reason").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+// ────────────────────────────────────────────────────────────
+// CALLS
+// Single source of truth for a video-consult's lifecycle, keyed
+// off a specific vitals record (not the patient directly) so a
+// patient with multiple visits/vitals can have separate call
+// histories per visit.
+// ────────────────────────────────────────────────────────────
 export const calls = pgTable("calls", {
   id: uuid("id").primaryKey().defaultRandom(),
   vitalsId: uuid("vitals_id").notNull().references(() => vitals.id),
   doctorId: uuid("doctor_id").notNull().references(() => doctors.id),
 
-  status: text("status").notNull().default("pending"), // pending, accepted, missed, declined_by_doctor, completed
+  status: text("status").notNull().default("pending"), // pending, accepted, missed, declined_by_doctor, declined_by_patient, doctor_not_responding, completed
   agoraChannelName: text("agora_channel_name"),
 
   requestedAt: timestamp("requested_at", { withTimezone: true }).defaultNow().notNull(),
@@ -177,7 +233,11 @@ export const calls = pgTable("calls", {
   doctorEndedAt: timestamp("doctor_ended_at", { withTimezone: true }),
 });
 
-// ── PRESCRIPTIONS ───────────────────────────
+// ────────────────────────────────────────────────────────────
+// PRESCRIPTIONS
+// Written by a doctor for a patient, optionally tied to the
+// specific vitals record that triggered the consult.
+// ────────────────────────────────────────────────────────────
 export const prescriptions = pgTable("prescriptions", {
   id: uuid("id").primaryKey().defaultRandom(),
   patientId: uuid("patient_id").notNull().references(() => patients.id, { onDelete: "cascade" }),
@@ -194,6 +254,7 @@ export const prescriptions = pgTable("prescriptions", {
   updatedAt: timestamp("updated_at", { withTimezone: true }),
 });
 
+// Line items (medicines) belonging to a prescription.
 export const prescriptionMedicines = pgTable("prescription_medicines", {
   id: uuid("id").primaryKey().defaultRandom(),
   prescriptionId: uuid("prescription_id").notNull().references(() => prescriptions.id, { onDelete: "cascade" }),
@@ -209,11 +270,14 @@ export const prescriptionMedicines = pgTable("prescription_medicines", {
   duration: text("duration"),
 });
 
-// ── DOCTOR LOGS ─────────────────────────────
-export const doctorLogs = pgTable("doctor_logs", {
+// ────────────────────────────────────────────────────────────
+// MISC
+// ────────────────────────────────────────────────────────────
+
+// Generic named counters for anything needing a global sequence
+// (not clinic- or date-scoped — dailyTokenCounters covers that case).
+export const globalCounters = pgTable("global_counters", {
   id: uuid("id").primaryKey().defaultRandom(),
-  doctorId: uuid("doctor_id").notNull().references(() => doctors.id, { onDelete: "cascade" }),
-  action: text("action").notNull().default("logout"),
-  reason: text("reason").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  name: varchar("name", { length: 50 }).notNull().unique(),
+  counter: integer("counter").notNull().default(0),
 });

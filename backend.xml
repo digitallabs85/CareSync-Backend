@@ -1,0 +1,3388 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+The content has been processed where content has been compressed (code blocks are separated by ⋮---- delimiter).
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: node_modules/**, drizzle/**, .git/**, .env, .env.*
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Content has been compressed - code blocks are separated by ⋮---- delimiter
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+api/
+  index.ts
+src/
+  architecture/
+    folderStructure.txt
+  config/
+    env.ts
+  db/
+    index.ts
+    schema.ts
+    seed.ts
+    seedAccount.ts
+  middleware/
+    auth.middleware.ts
+    errorHandler.middleware.ts
+    requireRole.middleware.ts
+  modules/
+    admin/
+      admin.controller.ts
+      admin.routes.ts
+      admin.service.ts
+      admin.validation.ts
+    auth/
+      auth.controller.ts
+      auth.routes.ts
+      auth.service.ts
+      auth.validation.ts
+    consults/
+      consult.controller.ts
+      consult.routes.ts
+      consult.service.ts
+    cron/
+      cron.routes.ts
+    doctors/
+      doctor.controller.ts
+      doctor.routes.ts
+      doctor.service.ts
+      doctor.validation.ts
+    notifications/
+      notification.controller.ts
+      notification.routes.ts
+      notification.service.ts
+      notification.validation.ts
+    patients/
+      patient.controller.ts
+      patient.routes.ts
+      patient.service.ts
+      patient.validation.ts
+    prescriptions/
+      prescription.controller.ts
+      prescription.routes.ts
+      prescription.service.ts
+      prescription.validation.ts
+    vitals/
+      vitals.controller.ts
+      vitals.routes.ts
+      vitals.service.ts
+      vitals.validation.ts
+  routes/
+    index.ts
+  services/
+    email.ts
+    firebase.ts
+    test-email.js
+  app.ts
+  server.ts
+.gitignore
+backend.txt
+drizzle.config.ts
+message.ts
+package.json
+repomix-output.xml
+tsconfig.json
+vercel.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="backend.txt">
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+The content has been processed where content has been compressed (code blocks are separated by ⋮---- delimiter).
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: node_modules/**, drizzle/**, .git/**, .env, .env.*
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Content has been compressed - code blocks are separated by ⋮---- delimiter
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+api/
+  index.ts
+src/
+  architecture/
+    folderStructure.txt
+  config/
+    env.ts
+  db/
+    index.ts
+    schema.ts
+    seed.ts
+    seedAccount.ts
+  middleware/
+    auth.middleware.ts
+    errorHandler.middleware.ts
+    requireRole.middleware.ts
+  modules/
+    admin/
+      admin.controller.ts
+      admin.routes.ts
+      admin.service.ts
+      admin.validation.ts
+    auth/
+      auth.controller.ts
+      auth.routes.ts
+      auth.service.ts
+      auth.validation.ts
+    consults/
+      consult.controller.ts
+      consult.routes.ts
+      consult.service.ts
+    cron/
+      cron.routes.ts
+    doctors/
+      doctor.controller.ts
+      doctor.routes.ts
+      doctor.service.ts
+      doctor.validation.ts
+    notifications/
+      notification.controller.ts
+      notification.routes.ts
+      notification.service.ts
+      notification.validation.ts
+    patients/
+      patient.controller.ts
+      patient.routes.ts
+      patient.service.ts
+      patient.validation.ts
+    prescriptions/
+      prescription.controller.ts
+      prescription.routes.ts
+      prescription.service.ts
+      prescription.validation.ts
+    vitals/
+      vitals.controller.ts
+      vitals.routes.ts
+      vitals.service.ts
+      vitals.validation.ts
+  routes/
+    index.ts
+  services/
+    email.ts
+    firebase.ts
+    test-email.js
+  app.ts
+  server.ts
+.gitignore
+drizzle.config.ts
+message.ts
+package.json
+repomix-output.xml
+tsconfig.json
+vercel.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="repomix-output.xml">
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+notification.controller.ts
+notification.routes.ts
+notification.service.ts
+notification.validation.ts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="notification.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import {
+  saveFcmTokenSchema,
+  removeFcmTokenSchema,
+  alertDoctorSchema,
+  acceptCallSchema,
+  endCallSchema,
+} from "./notification.validation";
+import * as notificationService from "./notification.service";
+
+export async function saveFcmToken(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = saveFcmTokenSchema.parse(req.body);
+    const doctor = (req as any).user;
+    const result = await notificationService.saveDoctorFcmToken(doctor.id, input.token);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function removeFcmToken(req: Request, res: Response, next: NextFunction) {
+  try {
+    removeFcmTokenSchema.parse(req.body);
+    const doctor = (req as any).user;
+    const result = await notificationService.removeDoctorFcmToken(doctor.id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function alert(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = alertDoctorSchema.parse(req.body);
+    const result = await notificationService.alertDoctor(input.doctorId, input.vitalsId);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function accept(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = acceptCallSchema.parse(req.body);
+    const doctor = (req as any).user;
+    const result = await notificationService.acceptCall(doctor.id, input.vitalsId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function status(req: Request, res: Response, next: NextFunction) {
+  try {
+    const vitalsId = req.params.vitalsId as string;
+    const result = await notificationService.getCallStatus(vitalsId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function end(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = endCallSchema.parse(req.body);
+    const user = (req as any).user;
+    const result = await notificationService.endCall(input.vitalsId, user.role, input.reason);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+</file>
+
+<file path="notification.routes.ts">
+import { Router } from "express";
+import * as notificationController from "./notification.controller";
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+
+const router = Router();
+
+router.post("/doctor-token", authMiddleware, requireRole("doctor"), notificationController.saveFcmToken);
+router.delete("/doctor-token", authMiddleware, requireRole("doctor"), notificationController.removeFcmToken);
+router.post("/alert-doctor", authMiddleware, requireRole("clinic"), notificationController.alert);
+router.post("/accept-call", authMiddleware, requireRole("doctor"), notificationController.accept);
+router.get("/call-status/:vitalsId", authMiddleware, notificationController.status);
+router.post("/end-call", authMiddleware, notificationController.end);
+
+export default router;
+</file>
+
+<file path="notification.service.ts">
+import { eq, and } from "drizzle-orm";
+import { db } from "../../db";
+import { doctors, calls, vitals } from "../../db/schema";
+import { sendPushNotification } from "../../services/firebase";
+
+export async function saveDoctorFcmToken(doctorId: string, token: string) {
+  await db.update(doctors).set({ fcmToken: token }).where(eq(doctors.id, doctorId));
+  return { success: true };
+}
+
+export async function removeDoctorFcmToken(doctorId: string) {
+  await db.update(doctors).set({ fcmToken: null }).where(eq(doctors.id, doctorId));
+  return { success: true };
+}
+
+
+export async function alertDoctor(doctorId: string, vitalsId: string) {
+  const doctor = await db.query.doctors.findFirst({ where: eq(doctors.id, doctorId) });
+  if (!doctor) {
+    const err: any = new Error("Doctor not found");
+    err.status = 404;
+    throw err;
+  }
+  if (doctor.doctorStatus !== "online" || doctor.onCall) {
+    const err: any = new Error("Doctor is not available");
+    err.status = 409;
+    throw err;
+  }
+
+  const [call] = await db.insert(calls).values({
+    vitalsId,
+    doctorId,
+    status: "pending",
+    agoraChannelName: `consult-${vitalsId}`,
+  }).returning();
+
+  if (doctor.fcmToken) {
+    await sendPushNotification(
+      doctor.fcmToken,
+      "Incoming Consultation Request",
+      "A patient is waiting for consultation.",
+      { vitalsId, callId: call.id, type: "incoming_call" }
+    );
+  }
+
+  return call;
+}
+
+export async function acceptCall(doctorId: string, vitalsId: string) {
+  const call = await db.query.calls.findFirst({
+    where: and(eq(calls.vitalsId, vitalsId), eq(calls.doctorId, doctorId), eq(calls.status, "pending")),
+    orderBy: (c, { desc }) => [desc(c.requestedAt)],
+  });
+  if (!call) {
+    const err: any = new Error("No pending call found");
+    err.status = 404;
+    throw err;
+  }
+
+  const [updated] = await db.update(calls)
+    .set({ status: "accepted", acceptedAt: new Date() })
+    .where(eq(calls.id, call.id))
+    .returning();
+
+  await db.update(doctors).set({ onCall: true }).where(eq(doctors.id, doctorId));
+
+  // auto-mark as online consultation since a video call was actually accepted
+  await db.update(vitals).set({ patientType: "Online Consultation" }).where(eq(vitals.id, vitalsId));
+
+  return updated;
+}
+
+export async function getCallStatus(vitalsId: string) {
+  const call = await db.query.calls.findFirst({
+    where: eq(calls.vitalsId, vitalsId),
+    orderBy: (c, { desc }) => [desc(c.requestedAt)],
+  });
+  if (!call) {
+    const err: any = new Error("Call not found");
+    err.status = 404;
+    throw err;
+  }
+  return call;
+}
+
+export async function endCall(vitalsId: string, role: "clinic" | "doctor", reason?: string) {
+  const call = await db.query.calls.findFirst({
+    where: eq(calls.vitalsId, vitalsId),
+    orderBy: (c, { desc }) => [desc(c.requestedAt)],
+  });
+  if (!call) {
+    const err: any = new Error("Call not found");
+    err.status = 404;
+    throw err;
+  }
+
+  const isPatientSide = role === "clinic";
+  const [updated] = await db.update(calls)
+    .set({
+      status: "completed",
+      ...(isPatientSide ? { patientEndedAt: new Date() } : { doctorEndedAt: new Date() }),
+    })
+    .where(eq(calls.id, call.id))
+    .returning();
+
+  await db.update(doctors).set({ onCall: false }).where(eq(doctors.id, call.doctorId));
+
+  return updated;
+}
+</file>
+
+<file path="notification.validation.ts">
+import { z } from "zod";
+
+export const saveFcmTokenSchema = z.object({
+  token: z.string().min(20),
+});
+
+export const removeFcmTokenSchema = z.object({
+  fcmToken: z.string().min(20),
+});
+
+export const alertDoctorSchema = z.object({
+  doctorId: z.string().uuid(),
+  vitalsId: z.string().uuid(),
+});
+
+export const acceptCallSchema = z.object({
+  vitalsId: z.string().uuid(),
+});
+
+export const endCallSchema = z.object({
+  vitalsId: z.string().uuid(),
+  reason: z.string().optional(),
+});
+
+export type SaveFcmTokenInput = z.infer<typeof saveFcmTokenSchema>;
+export type RemoveFcmTokenInput = z.infer<typeof removeFcmTokenSchema>;
+export type AlertDoctorInput = z.infer<typeof alertDoctorSchema>;
+export type AcceptCallInput = z.infer<typeof acceptCallSchema>;
+export type EndCallInput = z.infer<typeof endCallSchema>;
+</file>
+
+</files>
+</file>
+
+<file path="api/index.ts">
+import app from "../src/app";
+</file>
+
+<file path="src/config/env.ts">
+import dotenv from "dotenv";
+⋮----
+function requireEnv(key: string): string
+⋮----
+// Vercel automatically sets VERCEL_ENV to "production", "preview", or "development"
+// on every deployment — it's never set locally, so this reliably distinguishes
+// "running on Vercel in production" from "running on my machine"
+</file>
+
+<file path="src/db/index.ts">
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+⋮----
+import { env } from "../config/env";
+</file>
+
+<file path="src/db/schema.ts">
+// src/db/schema.ts
+import { pgTable, text, timestamp, uuid, varchar, integer, numeric, boolean, jsonb, uniqueIndex, date } from "drizzle-orm/pg-core";
+⋮----
+// ────────────────────────────────────────────────────────────
+// ADMIN
+// Platform-level admins (not clinic staff, not doctors).
+// ────────────────────────────────────────────────────────────
+⋮----
+// Audit trail of admin actions (clinic suspended, doctor created, etc).
+// actorId/actorName/actorRole kept denormalized so logs stay readable
+// even if the acting admin is later deleted.
+⋮----
+// ────────────────────────────────────────────────────────────
+// CLINICS
+// A clinic is the tenant/account that patients, kiosks, and
+// walk-in flows belong to. Doctors are NOT owned by a clinic —
+// see doctorClinicAssignments below for the many-to-many link.
+// ────────────────────────────────────────────────────────────
+⋮----
+// merged from pricing + page_permissions (1:1 tables, no reason to split)
+⋮----
+// ────────────────────────────────────────────────────────────
+// PATIENTS
+// A patient record is scoped to one clinic (walk-in registration).
+// Token/MR number are generated per clinic per day.
+// ────────────────────────────────────────────────────────────
+⋮----
+tokenDate: date("token_date"), // single ts, no separate date/time cols
+⋮----
+// token only unique per clinic per day, not globally
+⋮----
+// Backing counter used to generate the next daily token number per clinic.
+⋮----
+// ────────────────────────────────────────────────────────────
+// VITALS
+// One patient can have multiple vitals records (e.g. repeat visits
+// same day, or online-consult flow). Each vitals record is what a
+// `calls` row and a `prescriptions` row hang off of.
+// ────────────────────────────────────────────────────────────
+⋮----
+// NOTE: no roomUrl/roomName/callStatus here anymore — that's all in `calls` now
+⋮----
+// ────────────────────────────────────────────────────────────
+// DOCTORS
+// A doctor is independent of any clinic. Which clinics a doctor
+// can serve is controlled entirely by doctorClinicAssignments —
+// there is intentionally no clinicId column on this table.
+// ────────────────────────────────────────────────────────────
+⋮----
+doctorStatus: text("doctor_status").notNull().default("offline"), // online | offline
+status: text("status").notNull().default("Active"), // account status (Active/Suspended), set by admin
+⋮----
+// Many-to-many link between doctors and clinics.
+// A doctor can be assigned to any number of clinics; a clinic can
+// have any number of assigned doctors. To list doctors available to
+// a clinic: join this table on clinicId. To list clinics a doctor
+// serves: join this table on doctorId.
+⋮----
+// Login/logout history per doctor (for shift tracking / audit).
+⋮----
+// Explicit logout-with-reason events (separate from doctorSessions —
+// this is the "why did you go offline" log shown to admins).
+⋮----
+// ────────────────────────────────────────────────────────────
+// CALLS
+// Single source of truth for a video-consult's lifecycle, keyed
+// off a specific vitals record (not the patient directly) so a
+// patient with multiple visits/vitals can have separate call
+// histories per visit.
+// ────────────────────────────────────────────────────────────
+⋮----
+status: text("status").notNull().default("pending"), // pending, accepted, missed, declined_by_doctor, declined_by_patient, doctor_not_responding, completed
+⋮----
+// ────────────────────────────────────────────────────────────
+// PRESCRIPTIONS
+// Written by a doctor for a patient, optionally tied to the
+// specific vitals record that triggered the consult.
+// ────────────────────────────────────────────────────────────
+⋮----
+// Line items (medicines) belonging to a prescription.
+⋮----
+// ────────────────────────────────────────────────────────────
+// MISC
+// ────────────────────────────────────────────────────────────
+⋮----
+// Generic named counters for anything needing a global sequence
+// (not clinic- or date-scoped — dailyTokenCounters covers that case).
+</file>
+
+<file path="src/db/seed.ts">
+//
+</file>
+
+<file path="src/db/seedAccount.ts">
+import bcrypt from "bcryptjs";
+import { db } from "./index";
+import { admins } from "./schema";
+import { env } from "../config/env";
+⋮----
+async function seed()
+</file>
+
+<file path="src/middleware/auth.middleware.ts">
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { env } from "../config/env";
+⋮----
+export function authMiddleware(req: Request, res: Response, next: NextFunction)
+⋮----
+console.log("JWT verify error:", (err as Error).message); // TEMP DEBUG
+</file>
+
+<file path="src/middleware/errorHandler.middleware.ts">
+import { Request, Response, NextFunction } from "express";
+import { ZodError } from "zod";
+⋮----
+export function errorHandler(err: any, req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/middleware/requireRole.middleware.ts">
+import { Request, Response, NextFunction } from "express";
+⋮----
+export function requireRole(...allowedRoles: string[])
+</file>
+
+<file path="src/modules/admin/admin.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { adminLoginSchema, createClinicSchema, assignmentSchema } from "./admin.validation";
+import { updateStatusSchema } from "./admin.validation";
+⋮----
+export async function login(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function createClinic(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function updateClinicStatus(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function updateDoctorStatus(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAllClinics(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAllDoctors(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAuditLogs(req: Request, res: Response, next: NextFunction)
+⋮----
+// ── Doctor ↔ Clinic assignment ──
+⋮----
+export async function assignDoctorToClinic(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function unassignDoctorFromClinic(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/admin/admin.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+</file>
+
+<file path="src/modules/admin/admin.service.ts">
+import bcrypt from "bcryptjs";
+import jwt, { SignOptions } from "jsonwebtoken";
+import { eq } from "drizzle-orm";
+import { db } from "../../db";
+import { admins, clinics, doctors, auditLogs } from "../../db/schema";
+import { env } from "../../config/env";
+⋮----
+import type { AdminLoginInput, CreateClinicInput, UpdateStatusInput } from "./admin.validation";
+⋮----
+async function logAudit(params: {
+  actorId: string;
+  actorName: string;
+  actorRole: string;
+  action: string;
+  entityType?: string;
+  entityId?: string;
+  entityName?: string;
+  description: string;
+})
+⋮----
+export async function loginAdmin(input: AdminLoginInput)
+⋮----
+export async function createClinic(input: CreateClinicInput, adminId: string, adminName: string)
+⋮----
+export async function updateClinicStatus(
+  clinicId: string,
+  status: UpdateStatusInput["status"],
+  adminId: string,
+  adminName: string
+)
+⋮----
+export async function updateDoctorStatus(
+  doctorId: string,
+  status: UpdateStatusInput["status"],
+  adminId: string,
+  adminName: string
+)
+⋮----
+export async function getAllClinics()
+⋮----
+export async function getAllDoctorsAdmin()
+⋮----
+export async function getAuditLogs()
+⋮----
+// ── Doctor ↔ Clinic assignment (admin can assign any doctor to any clinic) ──
+⋮----
+export async function assignDoctorToClinic(
+  doctorId: string,
+  clinicId: string,
+  adminId: string,
+  adminName: string
+)
+⋮----
+export async function unassignDoctorFromClinic(
+  doctorId: string,
+  clinicId: string,
+  adminId: string,
+  adminName: string
+)
+</file>
+
+<file path="src/modules/admin/admin.validation.ts">
+import { z } from "zod";
+⋮----
+export type AssignmentInput = z.infer<typeof assignmentSchema>;
+export type UpdateStatusInput = z.infer<typeof updateStatusSchema>;
+export type AdminLoginInput = z.infer<typeof adminLoginSchema>;
+export type CreateClinicInput = z.infer<typeof createClinicSchema>;
+</file>
+
+<file path="src/modules/auth/auth.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { signupSchema, loginSchema } from "./auth.validation";
+⋮----
+export async function signup(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function login(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function me(req: Request, res: Response, next: NextFunction)
+⋮----
+const clinicId = (req as any).user.id; // set by auth middleware
+</file>
+
+<file path="src/modules/auth/auth.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+</file>
+
+<file path="src/modules/auth/auth.service.ts">
+import bcrypt from "bcryptjs";
+import jwt, { SignOptions } from "jsonwebtoken";
+import { eq } from "drizzle-orm";
+import { db } from "../../db";
+import { clinics } from "../../db/schema";
+import { env } from "../../config/env";
+import type { SignupInput, LoginInput } from "./auth.validation";
+⋮----
+export async function signupClinic(input: SignupInput)
+⋮----
+export async function loginClinic(input: LoginInput)
+⋮----
+export async function getClinicProfile(clinicId: string)
+</file>
+
+<file path="src/modules/auth/auth.validation.ts">
+import { z } from "zod";
+⋮----
+export type SignupInput = z.infer<typeof signupSchema>;
+export type LoginInput = z.infer<typeof loginSchema>;
+</file>
+
+<file path="src/modules/consults/consult.controller.ts">
+import { Request, Response, NextFunction } from "express";
+⋮----
+export async function getToken(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/consults/consult.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+</file>
+
+<file path="src/modules/consults/consult.service.ts">
+import { RtcTokenBuilder, RtcRole } from "agora-access-token";
+import { eq } from "drizzle-orm";
+import { db } from "../../db";
+import { vitals, calls } from "../../db/schema";
+import { env } from "../../config/env";
+⋮----
+export async function generateAgoraToken(vitalsId: string, side: "patient" | "doctor")
+</file>
+
+<file path="src/modules/cron/cron.routes.ts">
+
+</file>
+
+<file path="src/modules/doctors/doctor.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import {
+  doctorLoginSchema,
+  doctorRegisterSchema,
+  updateDoctorSchema,
+  changePasswordSchema,
+  updateStatusSchema,
+  logoutSchema,
+  assignClinicSchema,
+  assignmentSchema,
+} from "./doctor.validation";
+⋮----
+export async function login(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function register(req: Request, res: Response, next: NextFunction)
+⋮----
+const clinic = (req as any).user; // clinic JWT
+⋮----
+export async function me(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function update(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function changePassword(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function updateStatus(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function logout(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAll(req: Request, res: Response, next: NextFunction)
+⋮----
+// ── Assignment endpoints ──
+⋮----
+// A clinic assigns itself an existing doctor (self-service, clinic-initiated)
+export async function assignSelfToDoctor(req: Request, res: Response, next: NextFunction)
+⋮----
+// Admin assigns any doctor to any clinic
+export async function adminAssign(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function adminUnassign(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getClinics(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getDoctorsByClinic(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAssignedDoctor(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/doctors/doctor.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+⋮----
+// ── Clinic ↔ Doctor assignment ──
+</file>
+
+<file path="src/modules/doctors/doctor.service.ts">
+import bcrypt from "bcryptjs";
+import jwt, { SignOptions } from "jsonwebtoken";
+import { eq, and } from "drizzle-orm";
+import { db } from "../../db";
+import { doctors, doctorSessions, doctorLogs, doctorClinicAssignments, clinics } from "../../db/schema";
+import { env } from "../../config/env";
+import type {
+  DoctorLoginInput,
+  DoctorRegisterInput,
+  UpdateDoctorInput,
+  ChangePasswordInput,
+  UpdateStatusInput,
+} from "./doctor.validation";
+⋮----
+function stripPassword(doctor: any)
+⋮----
+export async function loginDoctor(input: DoctorLoginInput)
+⋮----
+// A clinic registering a doctor now creates the doctor AND an
+// assignment row linking them to that clinic (was: doctors.clinicId).
+export async function registerDoctor(input: DoctorRegisterInput, clinicId: string)
+⋮----
+export async function getDoctorProfile(doctorId: string)
+⋮----
+export async function updateDoctorProfile(doctorId: string, input: UpdateDoctorInput)
+⋮----
+export async function changeDoctorPassword(doctorId: string, input: ChangePasswordInput)
+⋮----
+export async function updateDoctorStatus(doctorId: string, input: UpdateStatusInput)
+⋮----
+export async function logoutDoctor(doctorId: string, reason: string)
+⋮----
+// clinicId now filters through the assignment table instead of a
+// direct column on doctors.
+export async function getAllDoctors(clinicId?: string)
+⋮----
+// ── Doctor ↔ Clinic assignment management ──
+⋮----
+export async function assignDoctorToClinic(doctorId: string, clinicId: string)
+⋮----
+export async function unassignDoctorFromClinic(doctorId: string, clinicId: string)
+⋮----
+export async function getClinicsForDoctor(doctorId: string)
+⋮----
+export async function getDoctorsForClinic(clinicId: string)
+⋮----
+// Used by the kiosk flow — first available (online, not on call)
+// doctor assigned to this clinic. No fairness/rotation yet.
+export async function getAssignedDoctorForClinic(clinicId: string)
+</file>
+
+<file path="src/modules/doctors/doctor.validation.ts">
+import { z } from "zod";
+⋮----
+// ── Doctor ↔ Clinic assignment ──
+⋮----
+export type AssignClinicInput = z.infer<typeof assignClinicSchema>;
+export type AssignmentInput = z.infer<typeof assignmentSchema>;
+export type DoctorLoginInput = z.infer<typeof doctorLoginSchema>;
+export type DoctorRegisterInput = z.infer<typeof doctorRegisterSchema>;
+export type UpdateDoctorInput = z.infer<typeof updateDoctorSchema>;
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+export type UpdateStatusInput = z.infer<typeof updateStatusSchema>;
+export type LogoutInput = z.infer<typeof logoutSchema>;
+</file>
+
+<file path="src/modules/notifications/notification.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import {
+  saveFcmTokenSchema,
+  removeFcmTokenSchema,
+  alertDoctorSchema,
+  acceptCallSchema,
+  endCallSchema,
+} from "./notification.validation";
+⋮----
+export async function saveFcmToken(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function removeFcmToken(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function alert(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function accept(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function status(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function end(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/notifications/notification.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+</file>
+
+<file path="src/modules/notifications/notification.service.ts">
+import { eq, and } from "drizzle-orm";
+import { db } from "../../db";
+import { doctors, calls, vitals } from "../../db/schema";
+import { sendPushNotification } from "../../services/firebase";
+import { END_CALL_REASONS } from "./notification.validation";
+⋮----
+export async function saveDoctorFcmToken(doctorId: string, token: string)
+⋮----
+export async function removeDoctorFcmToken(doctorId: string)
+⋮----
+export async function alertDoctor(doctorId: string, vitalsId: string)
+⋮----
+export async function acceptCall(doctorId: string, vitalsId: string)
+⋮----
+// auto-mark as online consultation since a video call was actually accepted
+⋮----
+export async function getCallStatus(vitalsId: string)
+⋮----
+export async function endCall(vitalsId: string, role: "clinic" | "doctor", reason?: string)
+⋮----
+// honor the reason as the actual status when it's a valid one;
+// otherwise (no reason, or a normal hangup) mark completed
+</file>
+
+<file path="src/modules/notifications/notification.validation.ts">
+import { z } from "zod";
+⋮----
+export type SaveFcmTokenInput = z.infer<typeof saveFcmTokenSchema>;
+export type RemoveFcmTokenInput = z.infer<typeof removeFcmTokenSchema>;
+export type AlertDoctorInput = z.infer<typeof alertDoctorSchema>;
+export type AcceptCallInput = z.infer<typeof acceptCallSchema>;
+export type EndCallInput = z.infer<typeof endCallSchema>;
+</file>
+
+<file path="src/modules/patients/patient.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { savePatientSchema } from "./patient.validation";
+⋮----
+export async function save(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function find(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function findByMrNumber(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function verify(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function todayToken(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getToday(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/patients/patient.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+</file>
+
+<file path="src/modules/patients/patient.service.ts">
+import { eq, and, sql, desc } from "drizzle-orm";
+import { db } from "../../db";
+import { patients, dailyTokenCounters, globalCounters, vitals } from "../../db/schema";
+import type { SavePatientInput } from "./patient.validation";
+⋮----
+function todayDate()
+⋮----
+async function getNextToken(clinicId: string, date: string): Promise<number>
+⋮----
+async function getNextMrNumber(): Promise<string>
+⋮----
+function norm(v: any)
+⋮----
+async function findExistingMrNumber(input: SavePatientInput): Promise<string | null>
+⋮----
+// global (cross-clinic) lookup by phone — then verify identity with name/dob/gender
+⋮----
+export async function saveOrUpdatePatient(input: SavePatientInput, clinicId: string)
+⋮----
+// same clinic, same day — update in place (avoid duplicate queue entries)
+⋮----
+// new visit today (new patient, or returning patient on a new day / different clinic)
+⋮----
+export async function findPatientByPhone(phone: string)
+⋮----
+export async function findPatientByMrNumber(mrNumber: string, clinicId: string)
+⋮----
+export async function verifyToken(token: string, clinicId: string)
+⋮----
+export async function getTodayTokenByPhone(phone: string, clinicId: string)
+⋮----
+export async function getTodayPatients(clinicId: string)
+⋮----
+// dedupe: keep first (latest vitals) row per patient
+</file>
+
+<file path="src/modules/patients/patient.validation.ts">
+import { z } from "zod";
+⋮----
+export type SavePatientInput = z.infer<typeof savePatientSchema>;
+</file>
+
+<file path="src/modules/prescriptions/prescription.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { savePrescriptionSchema } from "./prescription.validation";
+⋮----
+export async function save(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getById(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getByVitalsId(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getTodayAll(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/prescriptions/prescription.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+</file>
+
+<file path="src/modules/prescriptions/prescription.service.ts">
+import { eq, and, gte, desc } from "drizzle-orm";
+import { db } from "../../db";
+import { prescriptions, prescriptionMedicines, patients } from "../../db/schema";
+import type { SavePrescriptionInput } from "./prescription.validation";
+⋮----
+export async function savePrescription(input: SavePrescriptionInput, doctorId: string)
+⋮----
+token: patient.token, // frozen at creation time — historical accuracy even after token resets
+⋮----
+export async function getPrescriptionById(prescriptionId: string)
+⋮----
+export async function getPrescriptionByVitalsId(vitalsId: string)
+⋮----
+export async function getAllPrescriptionsToday(doctorId?: string)
+</file>
+
+<file path="src/modules/prescriptions/prescription.validation.ts">
+import { z } from "zod";
+⋮----
+export type SavePrescriptionInput = z.infer<typeof savePrescriptionSchema>;
+</file>
+
+<file path="src/modules/vitals/vitals.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { saveVitalsSchema, updateVitalsSchema } from "./vitals.validation";
+⋮----
+export async function save(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function update(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function historyByPatient(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function historyByPhone(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/vitals/vitals.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+</file>
+
+<file path="src/modules/vitals/vitals.service.ts">
+import { eq, desc } from "drizzle-orm";
+import { db } from "../../db";
+import { vitals, patients } from "../../db/schema";
+import type { SaveVitalsInput, UpdateVitalsInput } from "./vitals.validation";
+⋮----
+export async function saveVitals(input: SaveVitalsInput)
+⋮----
+export async function updateVitals(vitalsId: string, input: UpdateVitalsInput)
+⋮----
+export async function getVitalsByPatient(patientId: string)
+⋮----
+export async function getVitalsByPhone(phone: string)
+</file>
+
+<file path="src/modules/vitals/vitals.validation.ts">
+import { z } from "zod";
+⋮----
+export type SaveVitalsInput = z.infer<typeof saveVitalsSchema>;
+export type UpdateVitalsInput = z.infer<typeof updateVitalsSchema>;
+</file>
+
+<file path="src/routes/index.ts">
+import { Router } from "express";
+import authRoutes from "../modules/auth/auth.routes";
+import adminRoutes from "../modules/admin/admin.routes";
+import doctorRoutes from "../modules/doctors/doctor.routes";
+import patientRoutes from "../modules/patients/patient.routes";
+import vitalsRoutes from "../modules/vitals/vitals.routes";
+import consultRoutes from "../modules/consults/consult.routes";
+import notificationRoutes from "../modules/notifications/notification.routes";
+import prescriptionRoutes from "../modules/prescriptions/prescription.routes";
+</file>
+
+<file path="src/services/firebase.ts">
+import { initializeApp, cert, getApps } from "firebase-admin/app";
+import { getMessaging } from "firebase-admin/messaging";
+import { env } from "../config/env";
+⋮----
+export async function sendPushNotification(
+  fcmToken: string,
+  title: string,
+  body: string,
+  data?: Record<string, string>
+)
+</file>
+
+<file path="src/services/test-email.js">
+// test-email.js
+</file>
+
+<file path="src/app.ts">
+import express, { Request, Response } from "express";
+import cors from "cors";
+import { env } from "./config/env";
+import { db } from "./db";
+import { sql } from "drizzle-orm";
+import routes from "./routes";
+import { errorHandler } from "./middleware/errorHandler.middleware";
+</file>
+
+<file path="src/server.ts">
+import app from "./app";
+import { env } from "./config/env";
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for instrumented libs generated by jscoverage/JSCover
+lib-cov
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.example
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+out
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+.output
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# vuepress build output
+.vuepress/dist
+
+# vuepress v2.x temp directory
+.temp
+
+# Sveltekit cache directory
+.svelte-kit/
+
+# vitepress build output
+**/.vitepress/dist
+
+# vitepress cache directory
+**/.vitepress/cache
+
+# Docusaurus cache and generated files
+.docusaurus
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# Firebase cache directory
+.firebase/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# pnpm
+.pnpm-store
+
+# yarn v3
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Vite files
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+.vite/
+
+# firebase config
+*firebase-adminsdk*.json
+</file>
+
+<file path="drizzle.config.ts">
+import { defineConfig } from "drizzle-kit";
+import dotenv from "dotenv";
+</file>
+
+<file path="message.ts">
+// src/db/schema.ts
+import { pgTable, text, timestamp, uuid, varchar, integer, date, time, boolean, jsonb } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import { serial } from "drizzle-orm/pg-core";
+⋮----
+//admin portal
+⋮----
+status: text("status").notNull().default("Active"), // 'Active' | 'Suspended'
+⋮----
+//admin audit
+⋮----
+// staff/users/clinic
+⋮----
+tokenDate: date("token_date"),           // date of latest check-in
+tokenTime: time("token_time"),            // time of last check-in
+⋮----
+// Video call fields
+⋮----
+//Rapid Testing
+⋮----
+//eyetesting
+⋮----
+//color blind testing
+⋮----
+// Hearing Testing Table
+⋮----
+// ─────────────────────────────────────────────
+// 4. DOCTORS
+// ─────────────────────────────────────────────
+⋮----
+status: text("status").notNull().default("Active"), // 'Active' | 'Suspended'
+onCall: boolean("on_call").default(false).notNull(), // true while doctor is actively in a video consultation
+⋮----
+// ─────────────────────────────────────────────
+// 4. CALLS
+// ─────────────────────────────────────────────
+⋮----
+status: text("status").default("pending"), // pending, accepted, missed, declined_by_doctor, completed
+createdDate: date("created_date"),   // call REQUEST date
+createdTime: time("created_time"),   // call REQUEST time
+⋮----
+acceptedAt: timestamp("accepted_at", { withTimezone: true }),             // doctor accepted
+missedAt: timestamp("missed_at", { withTimezone: true }),                 // patient cancelled pre-accept OR doctor timed out
+patientEndedAt: timestamp("patient_ended_at", { withTimezone: true }),    // patient hung up
+doctorEndedAt: timestamp("doctor_ended_at", { withTimezone: true }),      // doctor hung up
+callRequestTime: timestamp("call_request_time", { withTimezone: true }),  //call request time
+⋮----
+// ─────────────────────────────────────────────
+// 5. PRESCRIPTIONS (Header)
+// ─────────────────────────────────────────────
+⋮----
+updatedAt: timestamp("updated_at", { withTimezone: true }), // null until doctor edits
+⋮----
+// ─────────────────────────────────────────────
+// 6. PRESCRIPTION MEDICINES (One row per medicine)
+// ─────────────────────────────────────────────
+⋮----
+morning: boolean("morning").default(false).notNull(),     // 1 = true, 0 = false
+⋮----
+afterMeal: boolean("after_meal").default(true).notNull(),   // default after meal as common
+⋮----
+dosage: text("dosage"),      // e.g. "500mg", "1 tablet"
+duration: text("duration"),  // e.g. "3 days", "1 week"
+⋮----
+// ─────────────────────────────────────────────
+// 7. DOCTOR ACTIVITY LOGS (Logout Reasons)
+// ─────────────────────────────────────────────
+⋮----
+reason: text("reason").notNull(),                    // e.g. "Meal Break", "Shift Ends"
+⋮----
+// ─────────────────────────────────────────────
+// 8. DOCTOR SCHEDULES (weekly recurring availability)
+// ─────────────────────────────────────────────
+⋮----
+dayOfWeek: integer("day_of_week").notNull(), // 1=Monday ... 7=Sunday
+⋮----
+// ─────────────────────────────────────────────
+// PAGE PERMISSIONS (per-clinic page visibility toggle)
+// ─────────────────────────────────────────────
+</file>
+
+<file path="package.json">
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:generate:prod": "cross-env DEPLOY_TARGET=production drizzle-kit generate",
+    "db:migrate:prod": "cross-env DEPLOY_TARGET=production drizzle-kit migrate",
+    "db:studio:prod": "cross-env DEPLOY_TARGET=production drizzle-kit studio",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:seed:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seed.ts",
+    "db:seedAccount": "tsx src/db/seedAccount.ts",
+    "db:seedAccount:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seedAccount.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "agora-access-token": "^2.0.4",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "express": "^5.2.1",
+    "firebase-admin": "^14.4.0",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.20.2",
+    "cross-env": "^10.1.0",
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "sourceMap": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
+</file>
+
+<file path="vercel.json">
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/index.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "api/index.ts" }
+  ]
+}
+</file>
+
+<file path="src/architecture/folderStructure.txt">
+
+</file>
+
+<file path="src/services/email.ts">
+// import nodemailer from 'nodemailer';
+⋮----
+// const SMTP_USER = process.env.SMTP_USER;
+// const SMTP_PASS = process.env.SMTP_PASS;
+⋮----
+// let transporter: nodemailer.Transporter | null = null;
+⋮----
+// if (SMTP_USER && SMTP_PASS) {
+//     transporter = nodemailer.createTransport({
+//         host: process.env.SMTP_HOST || 'smtp.gmail.com',
+//         port: Number(process.env.SMTP_PORT) || 587,
+//         secure: false, // true for 465
+//         auth: {
+//             user: SMTP_USER,
+//             pass: SMTP_PASS,
+//         },
+//     });
+// }
+⋮----
+// export async function sendRequestNotification({
+//     teacherEmail,
+//     teacherName,
+//     studentName,
+//     subjectNames,
+//     schedule,
+//     requestId,
+// }: {
+//     teacherEmail: string;
+//     teacherName: string;
+//     studentName: string;
+//     subjectNames: string[];
+//     schedule?: string | null;
+//     requestId: string;
+// }) {
+//     if (!transporter) {
+//         console.log('📧 SMTP not configured, skipping email.');
+//         return;
+//     }
+⋮----
+//     const subject = `📚 New tuition request from ${studentName}`;
+//     const scheduleText = schedule || 'No specific schedule mentioned.';
+//     const subjectsList = subjectNames.join(', ');
+//     const dashboardLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/teacher/requests`;
+⋮----
+//     const html = `
+//   <!DOCTYPE html>
+//   <html>
+//   <head>
+//     <style>
+//       body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f9fafb; padding: 20px; }
+//       .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+//       .header { border-bottom: 2px solid #2563eb; padding-bottom: 16px; margin-bottom: 24px; }
+//       .logo { font-size: 24px; font-weight: bold; color: #2563eb; }
+//       .divider { height: 1px; background: #e5e7eb; margin: 24px 0; }
+//       .footer { margin-top: 32px; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 16px; text-align: center; }
+//     </style>
+//   </head>
+//   <body>
+//     <div class="container">
+//       <div class="header">
+//         <span class="logo">TuitionHub</span>
+//       </div>
+//       <h2>You have a new tuition request! 🎓</h2>
+//       <p><strong>Student:</strong> ${studentName}</p>
+//       <p><strong>Subjects:</strong> ${subjectsList}</p>
+//       <p><strong>Schedule:</strong> ${scheduleText}</p>
+//       <div class="divider"></div>
+//       <p>Please log in to your dashboard to respond to this request.</p>
+//       <a href="${dashboardLink}" style="display: inline-block; padding: 12px 24px; background-color: #2563eb; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600;">View & Respond</a>
+//       <div class="footer">
+//         This email was sent to you because you are a registered teacher on TuitionHub.
+//         <br />&copy; ${new Date().getFullYear()} TuitionHub. All rights reserved.
+//       </div>
+//     </div>
+//   </body>
+//   </html>
+// `;
+⋮----
+//     try {
+//         await transporter.sendMail({
+//             from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//             to: teacherEmail,
+//             subject,
+//             html,
+//         });
+//         console.log(`📧 Email sent to ${teacherEmail}`);
+//     } catch (error) {
+//         console.error('❌ Failed to send email:', error);
+//         // Don't throw – don't block the request
+//     }
+// }
+⋮----
+// export async function sendSubjectRequestNotification({
+//     teacherName,
+//     teacherEmail,
+//     subjectName,
+//     category,
+// }: {
+//     teacherName: string;
+//     teacherEmail: string;
+//     subjectName: string;
+//     category?: string;
+// }) {
+//     if (!transporter) {
+//         console.log('📧 SMTP not configured, skipping email.');
+//         return;
+//     }
+⋮----
+//     const adminEmail = process.env.ADMIN_NOTIFY_EMAIL || process.env.ADMIN_EMAIL;
+//     if (!adminEmail) {
+//         console.log('📧 No admin notify email configured, skipping.');
+//         return;
+//     }
+⋮----
+//     const adminLink = `${process.env.CLIENT_URL || 'http://localhost:3000'}/system-portal-8k2x`;
+⋮----
+//     const html = `
+//     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+//       <h2>New subject request 📚</h2>
+//       <p><strong>Teacher:</strong> ${teacherName} (${teacherEmail})</p>
+//       <p><strong>Requested subject:</strong> ${subjectName}</p>
+//       <p><strong>Category:</strong> ${category || "—"}</p>
+//       <p>Log in to the admin panel to approve or reject this request.</p>
+//       <a href="${adminLink}" style="display: inline-block; padding: 12px 24px; background-color: #2563eb; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 12px;">Open Admin Panel</a>
+//     </div>
+//   `;
+⋮----
+//     try {
+//         await transporter.sendMail({
+//             from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//             to: adminEmail,
+//             subject: `📚 Subject request: ${subjectName}`,
+//             html,
+//         });
+//         console.log(`📧 Subject request email sent to ${adminEmail}`);
+//     } catch (error) {
+//         console.error('❌ Failed to send subject request email:', error);
+//     }
+// }
+⋮----
+// export async function sendVerificationEmail(toEmail: string, fullName: string, code: string) {
+//   if (!transporter) {
+//     console.log('📧 SMTP not configured, skipping email.');
+//     return;
+//   }
+⋮----
+//   const html = `
+//     <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; text-align: center;">
+//       <h2>Verify your email</h2>
+//       <p>Hi ${fullName}, use this code to verify your TuitionHub account:</p>
+//       <div style="font-size: 32px; font-weight: bold; letter-spacing: 8px; background: #f1f5f9; padding: 16px; border-radius: 12px; margin: 20px 0;">
+//         ${code}
+//       </div>
+//       <p style="color: #6b7280; font-size: 13px;">This code expires in 10 minutes.</p>
+//     </div>
+//   `;
+⋮----
+//   try {
+//     await transporter.sendMail({
+//       from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//       to: toEmail,
+//       subject: `${code} is your verification code`,
+//       html,
+//     });
+//   } catch (error) {
+//     console.error('❌ Failed to send verification email:', error);
+//   }
+// }
+⋮----
+// export async function sendPasswordResetEmail(toEmail: string, fullName: string, resetLink: string) {
+//   if (!transporter) {
+//     console.log('📧 SMTP not configured, skipping email.');
+//     return;
+//   }
+⋮----
+//   const html = `
+//     <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto;">
+//       <h2>Reset your password</h2>
+//       <p>Hi ${fullName}, we received a request to reset your TuitionHub password.</p>
+//       <a href="${resetLink}" style="display: inline-block; padding: 12px 24px; background-color: #2563eb; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 16px 0;">Reset Password</a>
+//       <p style="color: #6b7280; font-size: 13px;">This link expires in 15 minutes. If you didn't request this, you can safely ignore this email.</p>
+//     </div>
+//   `;
+⋮----
+//   try {
+//     await transporter.sendMail({
+//       from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//       to: toEmail,
+//       subject: 'Reset your TuitionHub password',
+//       html,
+//     });
+//     console.log(`📧 Password reset email sent to ${toEmail}`);
+//   } catch (error) {
+//     console.error('❌ Failed to send password reset email:', error);
+//   }
+// }
+⋮----
+// export async function sendFeedbackNotification({
+//   userName,
+//   userEmail,
+//   role,
+//   type,
+//   message,
+// }: {
+//   userName: string;
+//   userEmail: string;
+//   role: string;
+//   type: string;
+//   message: string;
+// }) {
+//   if (!transporter) {
+//     console.log('📧 SMTP not configured, skipping email.');
+//     return;
+//   }
+⋮----
+//   const adminEmail = process.env.ADMIN_NOTIFY_EMAIL || process.env.ADMIN_EMAIL;
+//   if (!adminEmail) return;
+⋮----
+//   const typeLabel = { bug: "🐛 Bug Report", feature: "✨ Feature Request", other: "💬 Feedback" }[type] || "Feedback";
+⋮----
+//   const html = `
+//     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+//       <h2>${typeLabel}</h2>
+//       <p><strong>From:</strong> ${userName} (${userEmail}) — ${role}</p>
+//       <div style="background: #f1f5f9; padding: 16px; border-radius: 12px; margin: 16px 0; white-space: pre-wrap;">${message}</div>
+//     </div>
+//   `;
+⋮----
+//   try {
+//     await transporter.sendMail({
+//       from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//       to: adminEmail,
+//       subject: `${typeLabel} from ${userName}`,
+//       html,
+//     });
+//     console.log(`📧 Feedback email sent to ${adminEmail}`);
+//   } catch (error) {
+//     console.error('❌ Failed to send feedback email:', error);
+//   }
+// }
+</file>
+
+</files>
+</file>
+
+<file path="repomix-output.xml">
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+notification.controller.ts
+notification.routes.ts
+notification.service.ts
+notification.validation.ts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="notification.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import {
+  saveFcmTokenSchema,
+  removeFcmTokenSchema,
+  alertDoctorSchema,
+  acceptCallSchema,
+  endCallSchema,
+} from "./notification.validation";
+import * as notificationService from "./notification.service";
+
+export async function saveFcmToken(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = saveFcmTokenSchema.parse(req.body);
+    const doctor = (req as any).user;
+    const result = await notificationService.saveDoctorFcmToken(doctor.id, input.token);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function removeFcmToken(req: Request, res: Response, next: NextFunction) {
+  try {
+    removeFcmTokenSchema.parse(req.body);
+    const doctor = (req as any).user;
+    const result = await notificationService.removeDoctorFcmToken(doctor.id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function alert(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = alertDoctorSchema.parse(req.body);
+    const result = await notificationService.alertDoctor(input.doctorId, input.vitalsId);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function accept(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = acceptCallSchema.parse(req.body);
+    const doctor = (req as any).user;
+    const result = await notificationService.acceptCall(doctor.id, input.vitalsId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function status(req: Request, res: Response, next: NextFunction) {
+  try {
+    const vitalsId = req.params.vitalsId as string;
+    const result = await notificationService.getCallStatus(vitalsId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function end(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = endCallSchema.parse(req.body);
+    const user = (req as any).user;
+    const result = await notificationService.endCall(input.vitalsId, user.role, input.reason);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+</file>
+
+<file path="notification.routes.ts">
+import { Router } from "express";
+import * as notificationController from "./notification.controller";
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+
+const router = Router();
+
+router.post("/doctor-token", authMiddleware, requireRole("doctor"), notificationController.saveFcmToken);
+router.delete("/doctor-token", authMiddleware, requireRole("doctor"), notificationController.removeFcmToken);
+router.post("/alert-doctor", authMiddleware, requireRole("clinic"), notificationController.alert);
+router.post("/accept-call", authMiddleware, requireRole("doctor"), notificationController.accept);
+router.get("/call-status/:vitalsId", authMiddleware, notificationController.status);
+router.post("/end-call", authMiddleware, notificationController.end);
+
+export default router;
+</file>
+
+<file path="notification.service.ts">
+import { eq, and } from "drizzle-orm";
+import { db } from "../../db";
+import { doctors, calls, vitals } from "../../db/schema";
+import { sendPushNotification } from "../../services/firebase";
+
+export async function saveDoctorFcmToken(doctorId: string, token: string) {
+  await db.update(doctors).set({ fcmToken: token }).where(eq(doctors.id, doctorId));
+  return { success: true };
+}
+
+export async function removeDoctorFcmToken(doctorId: string) {
+  await db.update(doctors).set({ fcmToken: null }).where(eq(doctors.id, doctorId));
+  return { success: true };
+}
+
+
+export async function alertDoctor(doctorId: string, vitalsId: string) {
+  const doctor = await db.query.doctors.findFirst({ where: eq(doctors.id, doctorId) });
+  if (!doctor) {
+    const err: any = new Error("Doctor not found");
+    err.status = 404;
+    throw err;
+  }
+  if (doctor.doctorStatus !== "online" || doctor.onCall) {
+    const err: any = new Error("Doctor is not available");
+    err.status = 409;
+    throw err;
+  }
+
+  const [call] = await db.insert(calls).values({
+    vitalsId,
+    doctorId,
+    status: "pending",
+    agoraChannelName: `consult-${vitalsId}`,
+  }).returning();
+
+  if (doctor.fcmToken) {
+    await sendPushNotification(
+      doctor.fcmToken,
+      "Incoming Consultation Request",
+      "A patient is waiting for consultation.",
+      { vitalsId, callId: call.id, type: "incoming_call" }
+    );
+  }
+
+  return call;
+}
+
+export async function acceptCall(doctorId: string, vitalsId: string) {
+  const call = await db.query.calls.findFirst({
+    where: and(eq(calls.vitalsId, vitalsId), eq(calls.doctorId, doctorId), eq(calls.status, "pending")),
+    orderBy: (c, { desc }) => [desc(c.requestedAt)],
+  });
+  if (!call) {
+    const err: any = new Error("No pending call found");
+    err.status = 404;
+    throw err;
+  }
+
+  const [updated] = await db.update(calls)
+    .set({ status: "accepted", acceptedAt: new Date() })
+    .where(eq(calls.id, call.id))
+    .returning();
+
+  await db.update(doctors).set({ onCall: true }).where(eq(doctors.id, doctorId));
+
+  // auto-mark as online consultation since a video call was actually accepted
+  await db.update(vitals).set({ patientType: "Online Consultation" }).where(eq(vitals.id, vitalsId));
+
+  return updated;
+}
+
+export async function getCallStatus(vitalsId: string) {
+  const call = await db.query.calls.findFirst({
+    where: eq(calls.vitalsId, vitalsId),
+    orderBy: (c, { desc }) => [desc(c.requestedAt)],
+  });
+  if (!call) {
+    const err: any = new Error("Call not found");
+    err.status = 404;
+    throw err;
+  }
+  return call;
+}
+
+export async function endCall(vitalsId: string, role: "clinic" | "doctor", reason?: string) {
+  const call = await db.query.calls.findFirst({
+    where: eq(calls.vitalsId, vitalsId),
+    orderBy: (c, { desc }) => [desc(c.requestedAt)],
+  });
+  if (!call) {
+    const err: any = new Error("Call not found");
+    err.status = 404;
+    throw err;
+  }
+
+  const isPatientSide = role === "clinic";
+  const [updated] = await db.update(calls)
+    .set({
+      status: "completed",
+      ...(isPatientSide ? { patientEndedAt: new Date() } : { doctorEndedAt: new Date() }),
+    })
+    .where(eq(calls.id, call.id))
+    .returning();
+
+  await db.update(doctors).set({ onCall: false }).where(eq(doctors.id, call.doctorId));
+
+  return updated;
+}
+</file>
+
+<file path="notification.validation.ts">
+import { z } from "zod";
+
+export const saveFcmTokenSchema = z.object({
+  token: z.string().min(20),
+});
+
+export const removeFcmTokenSchema = z.object({
+  fcmToken: z.string().min(20),
+});
+
+export const alertDoctorSchema = z.object({
+  doctorId: z.string().uuid(),
+  vitalsId: z.string().uuid(),
+});
+
+export const acceptCallSchema = z.object({
+  vitalsId: z.string().uuid(),
+});
+
+export const endCallSchema = z.object({
+  vitalsId: z.string().uuid(),
+  reason: z.string().optional(),
+});
+
+export type SaveFcmTokenInput = z.infer<typeof saveFcmTokenSchema>;
+export type RemoveFcmTokenInput = z.infer<typeof removeFcmTokenSchema>;
+export type AlertDoctorInput = z.infer<typeof alertDoctorSchema>;
+export type AcceptCallInput = z.infer<typeof acceptCallSchema>;
+export type EndCallInput = z.infer<typeof endCallSchema>;
+</file>
+
+</files>
+</file>
+
+<file path="api/index.ts">
+import app from "../src/app";
+</file>
+
+<file path="src/config/env.ts">
+import dotenv from "dotenv";
+⋮----
+function requireEnv(key: string): string
+⋮----
+// Vercel automatically sets VERCEL_ENV to "production", "preview", or "development"
+// on every deployment — it's never set locally, so this reliably distinguishes
+// "running on Vercel in production" from "running on my machine"
+</file>
+
+<file path="src/db/index.ts">
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+⋮----
+import { env } from "../config/env";
+</file>
+
+<file path="src/db/schema.ts">
+// src/db/schema.ts
+import { pgTable, text, timestamp, uuid, varchar, integer, numeric, boolean, jsonb, uniqueIndex, date } from "drizzle-orm/pg-core";
+⋮----
+// ────────────────────────────────────────────────────────────
+// ADMIN
+// Platform-level admins (not clinic staff, not doctors).
+// ────────────────────────────────────────────────────────────
+⋮----
+// Audit trail of admin actions (clinic suspended, doctor created, etc).
+// actorId/actorName/actorRole kept denormalized so logs stay readable
+// even if the acting admin is later deleted.
+⋮----
+// ────────────────────────────────────────────────────────────
+// CLINICS
+// A clinic is the tenant/account that patients, kiosks, and
+// walk-in flows belong to. Doctors are NOT owned by a clinic —
+// see doctorClinicAssignments below for the many-to-many link.
+// ────────────────────────────────────────────────────────────
+⋮----
+// merged from pricing + page_permissions (1:1 tables, no reason to split)
+⋮----
+// ────────────────────────────────────────────────────────────
+// PATIENTS
+// A patient record is scoped to one clinic (walk-in registration).
+// Token/MR number are generated per clinic per day.
+// ────────────────────────────────────────────────────────────
+⋮----
+tokenDate: date("token_date"), // single ts, no separate date/time cols
+⋮----
+// token only unique per clinic per day, not globally
+⋮----
+// Backing counter used to generate the next daily token number per clinic.
+⋮----
+// ────────────────────────────────────────────────────────────
+// VITALS
+// One patient can have multiple vitals records (e.g. repeat visits
+// same day, or online-consult flow). Each vitals record is what a
+// `calls` row and a `prescriptions` row hang off of.
+// ────────────────────────────────────────────────────────────
+⋮----
+// NOTE: no roomUrl/roomName/callStatus here anymore — that's all in `calls` now
+⋮----
+// ────────────────────────────────────────────────────────────
+// DOCTORS
+// A doctor is independent of any clinic. Which clinics a doctor
+// can serve is controlled entirely by doctorClinicAssignments —
+// there is intentionally no clinicId column on this table.
+// ────────────────────────────────────────────────────────────
+⋮----
+doctorStatus: text("doctor_status").notNull().default("offline"), // online | offline
+status: text("status").notNull().default("Active"), // account status (Active/Suspended), set by admin
+⋮----
+// Many-to-many link between doctors and clinics.
+// A doctor can be assigned to any number of clinics; a clinic can
+// have any number of assigned doctors. To list doctors available to
+// a clinic: join this table on clinicId. To list clinics a doctor
+// serves: join this table on doctorId.
+⋮----
+// Login/logout history per doctor (for shift tracking / audit).
+⋮----
+// Explicit logout-with-reason events (separate from doctorSessions —
+// this is the "why did you go offline" log shown to admins).
+⋮----
+// ────────────────────────────────────────────────────────────
+// CALLS
+// Single source of truth for a video-consult's lifecycle, keyed
+// off a specific vitals record (not the patient directly) so a
+// patient with multiple visits/vitals can have separate call
+// histories per visit.
+// ────────────────────────────────────────────────────────────
+⋮----
+status: text("status").notNull().default("pending"), // pending, accepted, missed, declined_by_doctor, declined_by_patient, doctor_not_responding, completed
+⋮----
+// ────────────────────────────────────────────────────────────
+// PRESCRIPTIONS
+// Written by a doctor for a patient, optionally tied to the
+// specific vitals record that triggered the consult.
+// ────────────────────────────────────────────────────────────
+⋮----
+// Line items (medicines) belonging to a prescription.
+⋮----
+// ────────────────────────────────────────────────────────────
+// MISC
+// ────────────────────────────────────────────────────────────
+⋮----
+// Generic named counters for anything needing a global sequence
+// (not clinic- or date-scoped — dailyTokenCounters covers that case).
+</file>
+
+<file path="src/db/seed.ts">
+//
+</file>
+
+<file path="src/db/seedAccount.ts">
+import bcrypt from "bcryptjs";
+import { db } from "./index";
+import { admins } from "./schema";
+import { env } from "../config/env";
+⋮----
+async function seed()
+</file>
+
+<file path="src/middleware/auth.middleware.ts">
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { env } from "../config/env";
+⋮----
+export function authMiddleware(req: Request, res: Response, next: NextFunction)
+⋮----
+console.log("JWT verify error:", (err as Error).message); // TEMP DEBUG
+</file>
+
+<file path="src/middleware/errorHandler.middleware.ts">
+import { Request, Response, NextFunction } from "express";
+import { ZodError } from "zod";
+⋮----
+export function errorHandler(err: any, req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/middleware/requireRole.middleware.ts">
+import { Request, Response, NextFunction } from "express";
+⋮----
+export function requireRole(...allowedRoles: string[])
+</file>
+
+<file path="src/modules/admin/admin.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { adminLoginSchema, createClinicSchema, assignmentSchema } from "./admin.validation";
+import { updateStatusSchema } from "./admin.validation";
+⋮----
+export async function login(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function createClinic(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function updateClinicStatus(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function updateDoctorStatus(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAllClinics(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAllDoctors(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAuditLogs(req: Request, res: Response, next: NextFunction)
+⋮----
+// ── Doctor ↔ Clinic assignment ──
+⋮----
+export async function assignDoctorToClinic(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function unassignDoctorFromClinic(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/admin/admin.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+</file>
+
+<file path="src/modules/admin/admin.service.ts">
+import bcrypt from "bcryptjs";
+import jwt, { SignOptions } from "jsonwebtoken";
+import { eq } from "drizzle-orm";
+import { db } from "../../db";
+import { admins, clinics, doctors, auditLogs } from "../../db/schema";
+import { env } from "../../config/env";
+⋮----
+import type { AdminLoginInput, CreateClinicInput, UpdateStatusInput } from "./admin.validation";
+⋮----
+async function logAudit(params: {
+  actorId: string;
+  actorName: string;
+  actorRole: string;
+  action: string;
+  entityType?: string;
+  entityId?: string;
+  entityName?: string;
+  description: string;
+})
+⋮----
+export async function loginAdmin(input: AdminLoginInput)
+⋮----
+export async function createClinic(input: CreateClinicInput, adminId: string, adminName: string)
+⋮----
+export async function updateClinicStatus(
+  clinicId: string,
+  status: UpdateStatusInput["status"],
+  adminId: string,
+  adminName: string
+)
+⋮----
+export async function updateDoctorStatus(
+  doctorId: string,
+  status: UpdateStatusInput["status"],
+  adminId: string,
+  adminName: string
+)
+⋮----
+export async function getAllClinics()
+⋮----
+export async function getAllDoctorsAdmin()
+⋮----
+export async function getAuditLogs()
+⋮----
+// ── Doctor ↔ Clinic assignment (admin can assign any doctor to any clinic) ──
+⋮----
+export async function assignDoctorToClinic(
+  doctorId: string,
+  clinicId: string,
+  adminId: string,
+  adminName: string
+)
+⋮----
+export async function unassignDoctorFromClinic(
+  doctorId: string,
+  clinicId: string,
+  adminId: string,
+  adminName: string
+)
+</file>
+
+<file path="src/modules/admin/admin.validation.ts">
+import { z } from "zod";
+⋮----
+export type AssignmentInput = z.infer<typeof assignmentSchema>;
+export type UpdateStatusInput = z.infer<typeof updateStatusSchema>;
+export type AdminLoginInput = z.infer<typeof adminLoginSchema>;
+export type CreateClinicInput = z.infer<typeof createClinicSchema>;
+</file>
+
+<file path="src/modules/auth/auth.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { signupSchema, loginSchema } from "./auth.validation";
+⋮----
+export async function signup(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function login(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function me(req: Request, res: Response, next: NextFunction)
+⋮----
+const clinicId = (req as any).user.id; // set by auth middleware
+</file>
+
+<file path="src/modules/auth/auth.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+</file>
+
+<file path="src/modules/auth/auth.service.ts">
+import bcrypt from "bcryptjs";
+import jwt, { SignOptions } from "jsonwebtoken";
+import { eq } from "drizzle-orm";
+import { db } from "../../db";
+import { clinics } from "../../db/schema";
+import { env } from "../../config/env";
+import type { SignupInput, LoginInput } from "./auth.validation";
+⋮----
+export async function signupClinic(input: SignupInput)
+⋮----
+export async function loginClinic(input: LoginInput)
+⋮----
+export async function getClinicProfile(clinicId: string)
+</file>
+
+<file path="src/modules/auth/auth.validation.ts">
+import { z } from "zod";
+⋮----
+export type SignupInput = z.infer<typeof signupSchema>;
+export type LoginInput = z.infer<typeof loginSchema>;
+</file>
+
+<file path="src/modules/consults/consult.controller.ts">
+import { Request, Response, NextFunction } from "express";
+⋮----
+export async function getToken(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/consults/consult.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+</file>
+
+<file path="src/modules/consults/consult.service.ts">
+import { RtcTokenBuilder, RtcRole } from "agora-access-token";
+import { eq } from "drizzle-orm";
+import { db } from "../../db";
+import { vitals, calls } from "../../db/schema";
+import { env } from "../../config/env";
+⋮----
+export async function generateAgoraToken(vitalsId: string, side: "patient" | "doctor")
+</file>
+
+<file path="src/modules/cron/cron.routes.ts">
+
+</file>
+
+<file path="src/modules/doctors/doctor.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import {
+  doctorLoginSchema,
+  doctorRegisterSchema,
+  updateDoctorSchema,
+  changePasswordSchema,
+  updateStatusSchema,
+  logoutSchema,
+  assignClinicSchema,
+  assignmentSchema,
+} from "./doctor.validation";
+⋮----
+export async function login(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function register(req: Request, res: Response, next: NextFunction)
+⋮----
+const clinic = (req as any).user; // clinic JWT
+⋮----
+export async function me(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function update(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function changePassword(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function updateStatus(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function logout(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAll(req: Request, res: Response, next: NextFunction)
+⋮----
+// ── Assignment endpoints ──
+⋮----
+// A clinic assigns itself an existing doctor (self-service, clinic-initiated)
+export async function assignSelfToDoctor(req: Request, res: Response, next: NextFunction)
+⋮----
+// Admin assigns any doctor to any clinic
+export async function adminAssign(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function adminUnassign(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getClinics(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getDoctorsByClinic(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getAssignedDoctor(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/doctors/doctor.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+⋮----
+// ── Clinic ↔ Doctor assignment ──
+</file>
+
+<file path="src/modules/doctors/doctor.service.ts">
+import bcrypt from "bcryptjs";
+import jwt, { SignOptions } from "jsonwebtoken";
+import { eq, and } from "drizzle-orm";
+import { db } from "../../db";
+import { doctors, doctorSessions, doctorLogs, doctorClinicAssignments, clinics } from "../../db/schema";
+import { env } from "../../config/env";
+import type {
+  DoctorLoginInput,
+  DoctorRegisterInput,
+  UpdateDoctorInput,
+  ChangePasswordInput,
+  UpdateStatusInput,
+} from "./doctor.validation";
+⋮----
+function stripPassword(doctor: any)
+⋮----
+export async function loginDoctor(input: DoctorLoginInput)
+⋮----
+// A clinic registering a doctor now creates the doctor AND an
+// assignment row linking them to that clinic (was: doctors.clinicId).
+export async function registerDoctor(input: DoctorRegisterInput, clinicId: string)
+⋮----
+export async function getDoctorProfile(doctorId: string)
+⋮----
+export async function updateDoctorProfile(doctorId: string, input: UpdateDoctorInput)
+⋮----
+export async function changeDoctorPassword(doctorId: string, input: ChangePasswordInput)
+⋮----
+export async function updateDoctorStatus(doctorId: string, input: UpdateStatusInput)
+⋮----
+export async function logoutDoctor(doctorId: string, reason: string)
+⋮----
+// clinicId now filters through the assignment table instead of a
+// direct column on doctors.
+export async function getAllDoctors(clinicId?: string)
+⋮----
+// ── Doctor ↔ Clinic assignment management ──
+⋮----
+export async function assignDoctorToClinic(doctorId: string, clinicId: string)
+⋮----
+export async function unassignDoctorFromClinic(doctorId: string, clinicId: string)
+⋮----
+export async function getClinicsForDoctor(doctorId: string)
+⋮----
+export async function getDoctorsForClinic(clinicId: string)
+⋮----
+// Used by the kiosk flow — first available (online, not on call)
+// doctor assigned to this clinic. No fairness/rotation yet.
+export async function getAssignedDoctorForClinic(clinicId: string)
+</file>
+
+<file path="src/modules/doctors/doctor.validation.ts">
+import { z } from "zod";
+⋮----
+// ── Doctor ↔ Clinic assignment ──
+⋮----
+export type AssignClinicInput = z.infer<typeof assignClinicSchema>;
+export type AssignmentInput = z.infer<typeof assignmentSchema>;
+export type DoctorLoginInput = z.infer<typeof doctorLoginSchema>;
+export type DoctorRegisterInput = z.infer<typeof doctorRegisterSchema>;
+export type UpdateDoctorInput = z.infer<typeof updateDoctorSchema>;
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+export type UpdateStatusInput = z.infer<typeof updateStatusSchema>;
+export type LogoutInput = z.infer<typeof logoutSchema>;
+</file>
+
+<file path="src/modules/notifications/notification.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import {
+  saveFcmTokenSchema,
+  removeFcmTokenSchema,
+  alertDoctorSchema,
+  acceptCallSchema,
+  endCallSchema,
+} from "./notification.validation";
+⋮----
+export async function saveFcmToken(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function removeFcmToken(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function alert(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function accept(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function status(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function end(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/notifications/notification.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+</file>
+
+<file path="src/modules/notifications/notification.service.ts">
+import { eq, and } from "drizzle-orm";
+import { db } from "../../db";
+import { doctors, calls, vitals } from "../../db/schema";
+import { sendPushNotification } from "../../services/firebase";
+import { END_CALL_REASONS } from "./notification.validation";
+⋮----
+export async function saveDoctorFcmToken(doctorId: string, token: string)
+⋮----
+export async function removeDoctorFcmToken(doctorId: string)
+⋮----
+export async function alertDoctor(doctorId: string, vitalsId: string)
+⋮----
+export async function acceptCall(doctorId: string, vitalsId: string)
+⋮----
+// auto-mark as online consultation since a video call was actually accepted
+⋮----
+export async function getCallStatus(vitalsId: string)
+⋮----
+export async function endCall(vitalsId: string, role: "clinic" | "doctor", reason?: string)
+⋮----
+// honor the reason as the actual status when it's a valid one;
+// otherwise (no reason, or a normal hangup) mark completed
+</file>
+
+<file path="src/modules/notifications/notification.validation.ts">
+import { z } from "zod";
+⋮----
+export type SaveFcmTokenInput = z.infer<typeof saveFcmTokenSchema>;
+export type RemoveFcmTokenInput = z.infer<typeof removeFcmTokenSchema>;
+export type AlertDoctorInput = z.infer<typeof alertDoctorSchema>;
+export type AcceptCallInput = z.infer<typeof acceptCallSchema>;
+export type EndCallInput = z.infer<typeof endCallSchema>;
+</file>
+
+<file path="src/modules/patients/patient.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { savePatientSchema } from "./patient.validation";
+⋮----
+export async function save(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function find(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function findByMrNumber(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function verify(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function todayToken(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getToday(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/patients/patient.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+</file>
+
+<file path="src/modules/patients/patient.service.ts">
+import { eq, and, sql, desc } from "drizzle-orm";
+import { db } from "../../db";
+import { patients, dailyTokenCounters, globalCounters, vitals } from "../../db/schema";
+import type { SavePatientInput } from "./patient.validation";
+⋮----
+function todayDate()
+⋮----
+async function getNextToken(clinicId: string, date: string): Promise<number>
+⋮----
+async function getNextMrNumber(): Promise<string>
+⋮----
+function norm(v: any)
+⋮----
+async function findExistingMrNumber(input: SavePatientInput): Promise<string | null>
+⋮----
+// global (cross-clinic) lookup by phone — then verify identity with name/dob/gender
+⋮----
+export async function saveOrUpdatePatient(input: SavePatientInput, clinicId: string)
+⋮----
+// same clinic, same day — update in place (avoid duplicate queue entries)
+⋮----
+// new visit today (new patient, or returning patient on a new day / different clinic)
+⋮----
+export async function findPatientByPhone(phone: string)
+⋮----
+export async function findPatientByMrNumber(mrNumber: string, clinicId: string)
+⋮----
+export async function verifyToken(token: string, clinicId: string)
+⋮----
+export async function getTodayTokenByPhone(phone: string, clinicId: string)
+⋮----
+export async function getTodayPatients(clinicId: string)
+⋮----
+// dedupe: keep first (latest vitals) row per patient
+</file>
+
+<file path="src/modules/patients/patient.validation.ts">
+import { z } from "zod";
+⋮----
+export type SavePatientInput = z.infer<typeof savePatientSchema>;
+</file>
+
+<file path="src/modules/prescriptions/prescription.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { savePrescriptionSchema } from "./prescription.validation";
+⋮----
+export async function save(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getById(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getByVitalsId(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function getTodayAll(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/prescriptions/prescription.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+import { requireRole } from "../../middleware/requireRole.middleware";
+</file>
+
+<file path="src/modules/prescriptions/prescription.service.ts">
+import { eq, and, gte, desc } from "drizzle-orm";
+import { db } from "../../db";
+import { prescriptions, prescriptionMedicines, patients } from "../../db/schema";
+import type { SavePrescriptionInput } from "./prescription.validation";
+⋮----
+export async function savePrescription(input: SavePrescriptionInput, doctorId: string)
+⋮----
+token: patient.token, // frozen at creation time — historical accuracy even after token resets
+⋮----
+export async function getPrescriptionById(prescriptionId: string)
+⋮----
+export async function getPrescriptionByVitalsId(vitalsId: string)
+⋮----
+export async function getAllPrescriptionsToday(doctorId?: string)
+</file>
+
+<file path="src/modules/prescriptions/prescription.validation.ts">
+import { z } from "zod";
+⋮----
+export type SavePrescriptionInput = z.infer<typeof savePrescriptionSchema>;
+</file>
+
+<file path="src/modules/vitals/vitals.controller.ts">
+import { Request, Response, NextFunction } from "express";
+import { saveVitalsSchema, updateVitalsSchema } from "./vitals.validation";
+⋮----
+export async function save(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function update(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function historyByPatient(req: Request, res: Response, next: NextFunction)
+⋮----
+export async function historyByPhone(req: Request, res: Response, next: NextFunction)
+</file>
+
+<file path="src/modules/vitals/vitals.routes.ts">
+import { Router } from "express";
+⋮----
+import { authMiddleware } from "../../middleware/auth.middleware";
+</file>
+
+<file path="src/modules/vitals/vitals.service.ts">
+import { eq, desc } from "drizzle-orm";
+import { db } from "../../db";
+import { vitals, patients } from "../../db/schema";
+import type { SaveVitalsInput, UpdateVitalsInput } from "./vitals.validation";
+⋮----
+export async function saveVitals(input: SaveVitalsInput)
+⋮----
+export async function updateVitals(vitalsId: string, input: UpdateVitalsInput)
+⋮----
+export async function getVitalsByPatient(patientId: string)
+⋮----
+export async function getVitalsByPhone(phone: string)
+</file>
+
+<file path="src/modules/vitals/vitals.validation.ts">
+import { z } from "zod";
+⋮----
+export type SaveVitalsInput = z.infer<typeof saveVitalsSchema>;
+export type UpdateVitalsInput = z.infer<typeof updateVitalsSchema>;
+</file>
+
+<file path="src/routes/index.ts">
+import { Router } from "express";
+import authRoutes from "../modules/auth/auth.routes";
+import adminRoutes from "../modules/admin/admin.routes";
+import doctorRoutes from "../modules/doctors/doctor.routes";
+import patientRoutes from "../modules/patients/patient.routes";
+import vitalsRoutes from "../modules/vitals/vitals.routes";
+import consultRoutes from "../modules/consults/consult.routes";
+import notificationRoutes from "../modules/notifications/notification.routes";
+import prescriptionRoutes from "../modules/prescriptions/prescription.routes";
+</file>
+
+<file path="src/services/firebase.ts">
+import { initializeApp, cert, getApps } from "firebase-admin/app";
+import { getMessaging } from "firebase-admin/messaging";
+import { env } from "../config/env";
+⋮----
+export async function sendPushNotification(
+  fcmToken: string,
+  title: string,
+  body: string,
+  data?: Record<string, string>
+)
+</file>
+
+<file path="src/services/test-email.js">
+// test-email.js
+</file>
+
+<file path="src/app.ts">
+import express, { Request, Response } from "express";
+import cors from "cors";
+import { env } from "./config/env";
+import { db } from "./db";
+import { sql } from "drizzle-orm";
+import routes from "./routes";
+import { errorHandler } from "./middleware/errorHandler.middleware";
+</file>
+
+<file path="src/server.ts">
+import app from "./app";
+import { env } from "./config/env";
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for instrumented libs generated by jscoverage/JSCover
+lib-cov
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.example
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+out
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+.output
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# vuepress build output
+.vuepress/dist
+
+# vuepress v2.x temp directory
+.temp
+
+# Sveltekit cache directory
+.svelte-kit/
+
+# vitepress build output
+**/.vitepress/dist
+
+# vitepress cache directory
+**/.vitepress/cache
+
+# Docusaurus cache and generated files
+.docusaurus
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# Firebase cache directory
+.firebase/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# pnpm
+.pnpm-store
+
+# yarn v3
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Vite files
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+.vite/
+
+# firebase config
+*firebase-adminsdk*.json
+</file>
+
+<file path="drizzle.config.ts">
+import { defineConfig } from "drizzle-kit";
+import dotenv from "dotenv";
+</file>
+
+<file path="message.ts">
+// src/db/schema.ts
+import { pgTable, text, timestamp, uuid, varchar, integer, date, time, boolean, jsonb } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import { serial } from "drizzle-orm/pg-core";
+⋮----
+//admin portal
+⋮----
+status: text("status").notNull().default("Active"), // 'Active' | 'Suspended'
+⋮----
+//admin audit
+⋮----
+// staff/users/clinic
+⋮----
+tokenDate: date("token_date"),           // date of latest check-in
+tokenTime: time("token_time"),            // time of last check-in
+⋮----
+// Video call fields
+⋮----
+//Rapid Testing
+⋮----
+//eyetesting
+⋮----
+//color blind testing
+⋮----
+// Hearing Testing Table
+⋮----
+// ─────────────────────────────────────────────
+// 4. DOCTORS
+// ─────────────────────────────────────────────
+⋮----
+status: text("status").notNull().default("Active"), // 'Active' | 'Suspended'
+onCall: boolean("on_call").default(false).notNull(), // true while doctor is actively in a video consultation
+⋮----
+// ─────────────────────────────────────────────
+// 4. CALLS
+// ─────────────────────────────────────────────
+⋮----
+status: text("status").default("pending"), // pending, accepted, missed, declined_by_doctor, completed
+createdDate: date("created_date"),   // call REQUEST date
+createdTime: time("created_time"),   // call REQUEST time
+⋮----
+acceptedAt: timestamp("accepted_at", { withTimezone: true }),             // doctor accepted
+missedAt: timestamp("missed_at", { withTimezone: true }),                 // patient cancelled pre-accept OR doctor timed out
+patientEndedAt: timestamp("patient_ended_at", { withTimezone: true }),    // patient hung up
+doctorEndedAt: timestamp("doctor_ended_at", { withTimezone: true }),      // doctor hung up
+callRequestTime: timestamp("call_request_time", { withTimezone: true }),  //call request time
+⋮----
+// ─────────────────────────────────────────────
+// 5. PRESCRIPTIONS (Header)
+// ─────────────────────────────────────────────
+⋮----
+updatedAt: timestamp("updated_at", { withTimezone: true }), // null until doctor edits
+⋮----
+// ─────────────────────────────────────────────
+// 6. PRESCRIPTION MEDICINES (One row per medicine)
+// ─────────────────────────────────────────────
+⋮----
+morning: boolean("morning").default(false).notNull(),     // 1 = true, 0 = false
+⋮----
+afterMeal: boolean("after_meal").default(true).notNull(),   // default after meal as common
+⋮----
+dosage: text("dosage"),      // e.g. "500mg", "1 tablet"
+duration: text("duration"),  // e.g. "3 days", "1 week"
+⋮----
+// ─────────────────────────────────────────────
+// 7. DOCTOR ACTIVITY LOGS (Logout Reasons)
+// ─────────────────────────────────────────────
+⋮----
+reason: text("reason").notNull(),                    // e.g. "Meal Break", "Shift Ends"
+⋮----
+// ─────────────────────────────────────────────
+// 8. DOCTOR SCHEDULES (weekly recurring availability)
+// ─────────────────────────────────────────────
+⋮----
+dayOfWeek: integer("day_of_week").notNull(), // 1=Monday ... 7=Sunday
+⋮----
+// ─────────────────────────────────────────────
+// PAGE PERMISSIONS (per-clinic page visibility toggle)
+// ─────────────────────────────────────────────
+</file>
+
+<file path="package.json">
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:generate:prod": "cross-env DEPLOY_TARGET=production drizzle-kit generate",
+    "db:migrate:prod": "cross-env DEPLOY_TARGET=production drizzle-kit migrate",
+    "db:studio:prod": "cross-env DEPLOY_TARGET=production drizzle-kit studio",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:seed:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seed.ts",
+    "db:seedAccount": "tsx src/db/seedAccount.ts",
+    "db:seedAccount:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seedAccount.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "agora-access-token": "^2.0.4",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "express": "^5.2.1",
+    "firebase-admin": "^14.4.0",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.20.2",
+    "cross-env": "^10.1.0",
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "sourceMap": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
+</file>
+
+<file path="vercel.json">
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/index.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "api/index.ts" }
+  ]
+}
+</file>
+
+<file path="src/architecture/folderStructure.txt">
+
+</file>
+
+<file path="src/services/email.ts">
+// import nodemailer from 'nodemailer';
+⋮----
+// const SMTP_USER = process.env.SMTP_USER;
+// const SMTP_PASS = process.env.SMTP_PASS;
+⋮----
+// let transporter: nodemailer.Transporter | null = null;
+⋮----
+// if (SMTP_USER && SMTP_PASS) {
+//     transporter = nodemailer.createTransport({
+//         host: process.env.SMTP_HOST || 'smtp.gmail.com',
+//         port: Number(process.env.SMTP_PORT) || 587,
+//         secure: false, // true for 465
+//         auth: {
+//             user: SMTP_USER,
+//             pass: SMTP_PASS,
+//         },
+//     });
+// }
+⋮----
+// export async function sendRequestNotification({
+//     teacherEmail,
+//     teacherName,
+//     studentName,
+//     subjectNames,
+//     schedule,
+//     requestId,
+// }: {
+//     teacherEmail: string;
+//     teacherName: string;
+//     studentName: string;
+//     subjectNames: string[];
+//     schedule?: string | null;
+//     requestId: string;
+// }) {
+//     if (!transporter) {
+//         console.log('📧 SMTP not configured, skipping email.');
+//         return;
+//     }
+⋮----
+//     const subject = `📚 New tuition request from ${studentName}`;
+//     const scheduleText = schedule || 'No specific schedule mentioned.';
+//     const subjectsList = subjectNames.join(', ');
+//     const dashboardLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/teacher/requests`;
+⋮----
+//     const html = `
+//   <!DOCTYPE html>
+//   <html>
+//   <head>
+//     <style>
+//       body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f9fafb; padding: 20px; }
+//       .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+//       .header { border-bottom: 2px solid #2563eb; padding-bottom: 16px; margin-bottom: 24px; }
+//       .logo { font-size: 24px; font-weight: bold; color: #2563eb; }
+//       .divider { height: 1px; background: #e5e7eb; margin: 24px 0; }
+//       .footer { margin-top: 32px; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 16px; text-align: center; }
+//     </style>
+//   </head>
+//   <body>
+//     <div class="container">
+//       <div class="header">
+//         <span class="logo">TuitionHub</span>
+//       </div>
+//       <h2>You have a new tuition request! 🎓</h2>
+//       <p><strong>Student:</strong> ${studentName}</p>
+//       <p><strong>Subjects:</strong> ${subjectsList}</p>
+//       <p><strong>Schedule:</strong> ${scheduleText}</p>
+//       <div class="divider"></div>
+//       <p>Please log in to your dashboard to respond to this request.</p>
+//       <a href="${dashboardLink}" style="display: inline-block; padding: 12px 24px; background-color: #2563eb; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600;">View & Respond</a>
+//       <div class="footer">
+//         This email was sent to you because you are a registered teacher on TuitionHub.
+//         <br />&copy; ${new Date().getFullYear()} TuitionHub. All rights reserved.
+//       </div>
+//     </div>
+//   </body>
+//   </html>
+// `;
+⋮----
+//     try {
+//         await transporter.sendMail({
+//             from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//             to: teacherEmail,
+//             subject,
+//             html,
+//         });
+//         console.log(`📧 Email sent to ${teacherEmail}`);
+//     } catch (error) {
+//         console.error('❌ Failed to send email:', error);
+//         // Don't throw – don't block the request
+//     }
+// }
+⋮----
+// export async function sendSubjectRequestNotification({
+//     teacherName,
+//     teacherEmail,
+//     subjectName,
+//     category,
+// }: {
+//     teacherName: string;
+//     teacherEmail: string;
+//     subjectName: string;
+//     category?: string;
+// }) {
+//     if (!transporter) {
+//         console.log('📧 SMTP not configured, skipping email.');
+//         return;
+//     }
+⋮----
+//     const adminEmail = process.env.ADMIN_NOTIFY_EMAIL || process.env.ADMIN_EMAIL;
+//     if (!adminEmail) {
+//         console.log('📧 No admin notify email configured, skipping.');
+//         return;
+//     }
+⋮----
+//     const adminLink = `${process.env.CLIENT_URL || 'http://localhost:3000'}/system-portal-8k2x`;
+⋮----
+//     const html = `
+//     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+//       <h2>New subject request 📚</h2>
+//       <p><strong>Teacher:</strong> ${teacherName} (${teacherEmail})</p>
+//       <p><strong>Requested subject:</strong> ${subjectName}</p>
+//       <p><strong>Category:</strong> ${category || "—"}</p>
+//       <p>Log in to the admin panel to approve or reject this request.</p>
+//       <a href="${adminLink}" style="display: inline-block; padding: 12px 24px; background-color: #2563eb; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 12px;">Open Admin Panel</a>
+//     </div>
+//   `;
+⋮----
+//     try {
+//         await transporter.sendMail({
+//             from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//             to: adminEmail,
+//             subject: `📚 Subject request: ${subjectName}`,
+//             html,
+//         });
+//         console.log(`📧 Subject request email sent to ${adminEmail}`);
+//     } catch (error) {
+//         console.error('❌ Failed to send subject request email:', error);
+//     }
+// }
+⋮----
+// export async function sendVerificationEmail(toEmail: string, fullName: string, code: string) {
+//   if (!transporter) {
+//     console.log('📧 SMTP not configured, skipping email.');
+//     return;
+//   }
+⋮----
+//   const html = `
+//     <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; text-align: center;">
+//       <h2>Verify your email</h2>
+//       <p>Hi ${fullName}, use this code to verify your TuitionHub account:</p>
+//       <div style="font-size: 32px; font-weight: bold; letter-spacing: 8px; background: #f1f5f9; padding: 16px; border-radius: 12px; margin: 20px 0;">
+//         ${code}
+//       </div>
+//       <p style="color: #6b7280; font-size: 13px;">This code expires in 10 minutes.</p>
+//     </div>
+//   `;
+⋮----
+//   try {
+//     await transporter.sendMail({
+//       from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//       to: toEmail,
+//       subject: `${code} is your verification code`,
+//       html,
+//     });
+//   } catch (error) {
+//     console.error('❌ Failed to send verification email:', error);
+//   }
+// }
+⋮----
+// export async function sendPasswordResetEmail(toEmail: string, fullName: string, resetLink: string) {
+//   if (!transporter) {
+//     console.log('📧 SMTP not configured, skipping email.');
+//     return;
+//   }
+⋮----
+//   const html = `
+//     <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto;">
+//       <h2>Reset your password</h2>
+//       <p>Hi ${fullName}, we received a request to reset your TuitionHub password.</p>
+//       <a href="${resetLink}" style="display: inline-block; padding: 12px 24px; background-color: #2563eb; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 16px 0;">Reset Password</a>
+//       <p style="color: #6b7280; font-size: 13px;">This link expires in 15 minutes. If you didn't request this, you can safely ignore this email.</p>
+//     </div>
+//   `;
+⋮----
+//   try {
+//     await transporter.sendMail({
+//       from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//       to: toEmail,
+//       subject: 'Reset your TuitionHub password',
+//       html,
+//     });
+//     console.log(`📧 Password reset email sent to ${toEmail}`);
+//   } catch (error) {
+//     console.error('❌ Failed to send password reset email:', error);
+//   }
+// }
+⋮----
+// export async function sendFeedbackNotification({
+//   userName,
+//   userEmail,
+//   role,
+//   type,
+//   message,
+// }: {
+//   userName: string;
+//   userEmail: string;
+//   role: string;
+//   type: string;
+//   message: string;
+// }) {
+//   if (!transporter) {
+//     console.log('📧 SMTP not configured, skipping email.');
+//     return;
+//   }
+⋮----
+//   const adminEmail = process.env.ADMIN_NOTIFY_EMAIL || process.env.ADMIN_EMAIL;
+//   if (!adminEmail) return;
+⋮----
+//   const typeLabel = { bug: "🐛 Bug Report", feature: "✨ Feature Request", other: "💬 Feedback" }[type] || "Feedback";
+⋮----
+//   const html = `
+//     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+//       <h2>${typeLabel}</h2>
+//       <p><strong>From:</strong> ${userName} (${userEmail}) — ${role}</p>
+//       <div style="background: #f1f5f9; padding: 16px; border-radius: 12px; margin: 16px 0; white-space: pre-wrap;">${message}</div>
+//     </div>
+//   `;
+⋮----
+//   try {
+//     await transporter.sendMail({
+//       from: process.env.EMAIL_FROM || `TuitionHub <${SMTP_USER}>`,
+//       to: adminEmail,
+//       subject: `${typeLabel} from ${userName}`,
+//       html,
+//     });
+//     console.log(`📧 Feedback email sent to ${adminEmail}`);
+//   } catch (error) {
+//     console.error('❌ Failed to send feedback email:', error);
+//   }
+// }
+</file>
+
+</files>

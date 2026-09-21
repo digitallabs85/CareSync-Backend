@@ -1,0 +1,1 @@
+ALTER TABLE "clinics" ADD COLUMN "is_bifurcated" boolean DEFAULT false NOT NULL;

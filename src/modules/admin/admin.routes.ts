@@ -13,4 +13,7 @@ router.get("/doctors", authMiddleware, requireRole("admin"), adminController.get
 router.patch("/doctors/:id/status", authMiddleware, requireRole("admin"), adminController.updateDoctorStatus);
 router.get("/audit-logs", authMiddleware, requireRole("admin"), adminController.getAuditLogs);
 
+router.post("/doctor-clinic-assignments", authMiddleware, requireRole("admin"), adminController.assignDoctorToClinic);
+router.delete("/doctor-clinic-assignments", authMiddleware, requireRole("admin"), adminController.unassignDoctorFromClinic);
+
 export default router;

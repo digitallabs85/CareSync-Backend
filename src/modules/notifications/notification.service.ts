@@ -1,7 +1,8 @@
 import { eq, and } from "drizzle-orm";
 import { db } from "../../db";
-import { doctors, calls, vitals } from "../../db/schema";
+import { doctors, calls, vitals, patients } from "../../db/schema";
 import { sendPushNotification } from "../../services/firebase";
+import { END_CALL_REASONS } from "./notification.validation";
 
 export async function saveDoctorFcmToken(doctorId: string, token: string) {
   await db.update(doctors).set({ fcmToken: token }).where(eq(doctors.id, doctorId));
@@ -13,19 +14,33 @@ export async function removeDoctorFcmToken(doctorId: string) {
   return { success: true };
 }
 
-
 export async function alertDoctor(doctorId: string, vitalsId: string) {
+  console.log("[alertDoctor] called", { doctorId, vitalsId });
+
   const doctor = await db.query.doctors.findFirst({ where: eq(doctors.id, doctorId) });
   if (!doctor) {
+    console.log("[alertDoctor] doctor not found");
     const err: any = new Error("Doctor not found");
     err.status = 404;
     throw err;
   }
+  console.log("[alertDoctor] doctor found", { doctorStatus: doctor.doctorStatus, onCall: doctor.onCall, hasFcmToken: !!doctor.fcmToken });
+
   if (doctor.doctorStatus !== "online" || doctor.onCall) {
+    console.log("[alertDoctor] doctor not available");
     const err: any = new Error("Doctor is not available");
     err.status = 409;
     throw err;
   }
+
+  const [vitalsWithPatient] = await db
+    .select({ firstName: patients.firstName })
+    .from(vitals)
+    .innerJoin(patients, eq(vitals.patientId, patients.id))
+    .where(eq(vitals.id, vitalsId));
+
+  const patientName = vitalsWithPatient?.firstName ?? "Patient";
+  console.log("[alertDoctor] patient name resolved:", patientName);
 
   const [call] = await db.insert(calls).values({
     vitalsId,
@@ -33,14 +48,19 @@ export async function alertDoctor(doctorId: string, vitalsId: string) {
     status: "pending",
     agoraChannelName: `consult-${vitalsId}`,
   }).returning();
+  console.log("[alertDoctor] call row created:", call.id);
 
   if (doctor.fcmToken) {
-    await sendPushNotification(
+    console.log("[alertDoctor] sending push notification...");
+    const result = await sendPushNotification(
       doctor.fcmToken,
       "Incoming Consultation Request",
-      "A patient is waiting for consultation.",
-      { vitalsId, callId: call.id, type: "incoming_call" }
+      `${patientName} is waiting for consultation.`,
+      { vitalsId, callId: call.id, type: "incoming_call", patientName }
     );
+    console.log("[alertDoctor] push result:", result);
+  } else {
+    console.log("[alertDoctor] doctor has no fcmToken — push skipped");
   }
 
   return call;
@@ -94,10 +114,19 @@ export async function endCall(vitalsId: string, role: "clinic" | "doctor", reaso
     throw err;
   }
 
+  // honor the reason as the actual status when it's a valid one;
+  // otherwise (no reason, or a normal hangup) mark completed
+  const status = reason && (END_CALL_REASONS as readonly string[]).includes(reason)
+    ? reason
+    : "completed";
+
   const isPatientSide = role === "clinic";
+  const isMissedType = status === "doctor_not_responding";
+
   const [updated] = await db.update(calls)
     .set({
-      status: "completed",
+      status,
+      ...(isMissedType ? { missedAt: new Date() } : {}),
       ...(isPatientSide ? { patientEndedAt: new Date() } : { doctorEndedAt: new Date() }),
     })
     .where(eq(calls.id, call.id))
@@ -105,5 +134,39 @@ export async function endCall(vitalsId: string, role: "clinic" | "doctor", reaso
 
   await db.update(doctors).set({ onCall: false }).where(eq(doctors.id, call.doctorId));
 
+  return updated;
+}
+
+export async function doctorDeclineCall(doctorId: string, vitalsId: string) {
+  const call = await db.query.calls.findFirst({
+    where: and(eq(calls.vitalsId, vitalsId), eq(calls.doctorId, doctorId), eq(calls.status, "pending")),
+    orderBy: (c, { desc }) => [desc(c.requestedAt)],
+  });
+  if (!call) {
+    const err: any = new Error("No pending call found");
+    err.status = 404;
+    throw err;
+  }
+  const [updated] = await db.update(calls)
+    .set({ status: "declined_by_doctor" })
+    .where(eq(calls.id, call.id))
+    .returning();
+  return updated;
+}
+
+export async function patientDeclineCall(vitalsId: string) {
+  const call = await db.query.calls.findFirst({
+    where: and(eq(calls.vitalsId, vitalsId), eq(calls.status, "pending")),
+    orderBy: (c, { desc }) => [desc(c.requestedAt)],
+  });
+  if (!call) {
+    const err: any = new Error("No pending call found");
+    err.status = 404;
+    throw err;
+  }
+  const [updated] = await db.update(calls)
+    .set({ status: "declined_by_patient" })
+    .where(eq(calls.id, call.id))
+    .returning();
   return updated;
 }

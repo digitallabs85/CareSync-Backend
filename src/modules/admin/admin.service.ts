@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 import { db } from "../../db";
 import { admins, clinics, doctors, auditLogs } from "../../db/schema";
 import { env } from "../../config/env";
+import * as doctorService from "../doctors/doctor.service";
 import type { AdminLoginInput, CreateClinicInput, UpdateStatusInput } from "./admin.validation";
 
 async function logAudit(params: {
@@ -179,4 +180,56 @@ export async function getAuditLogs() {
   return db.query.auditLogs.findMany({
     orderBy: (a, { desc }) => [desc(a.createdAt)],
   });
+}
+
+// ── Doctor ↔ Clinic assignment (admin can assign any doctor to any clinic) ──
+
+export async function assignDoctorToClinic(
+  doctorId: string,
+  clinicId: string,
+  adminId: string,
+  adminName: string
+) {
+  const assignment = await doctorService.assignDoctorToClinic(doctorId, clinicId);
+
+  const doctor = await db.query.doctors.findFirst({ where: eq(doctors.id, doctorId) });
+  const clinic = await db.query.clinics.findFirst({ where: eq(clinics.id, clinicId) });
+
+  await logAudit({
+    actorId: adminId,
+    actorName: adminName,
+    actorRole: "admin",
+    action: "assign_doctor_clinic",
+    entityType: "doctor_clinic_assignment",
+    entityId: assignment.id,
+    entityName: `${doctor?.firstName} ${doctor?.lastName} → ${clinic?.username}`,
+    description: `Admin ${adminName} assigned doctor ${doctor?.email} to clinic ${clinic?.username}`,
+  });
+
+  return assignment;
+}
+
+export async function unassignDoctorFromClinic(
+  doctorId: string,
+  clinicId: string,
+  adminId: string,
+  adminName: string
+) {
+  const deleted = await doctorService.unassignDoctorFromClinic(doctorId, clinicId);
+
+  const doctor = await db.query.doctors.findFirst({ where: eq(doctors.id, doctorId) });
+  const clinic = await db.query.clinics.findFirst({ where: eq(clinics.id, clinicId) });
+
+  await logAudit({
+    actorId: adminId,
+    actorName: adminName,
+    actorRole: "admin",
+    action: "unassign_doctor_clinic",
+    entityType: "doctor_clinic_assignment",
+    entityId: deleted.id,
+    entityName: `${doctor?.firstName} ${doctor?.lastName} ✕ ${clinic?.username}`,
+    description: `Admin ${adminName} unassigned doctor ${doctor?.email} from clinic ${clinic?.username}`,
+  });
+
+  return deleted;
 }

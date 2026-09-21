@@ -6,6 +6,8 @@ import {
   changePasswordSchema,
   updateStatusSchema,
   logoutSchema,
+  assignClinicSchema,
+  assignmentSchema,
 } from "./doctor.validation";
 import * as doctorService from "./doctor.service";
 
@@ -88,6 +90,82 @@ export async function getAll(req: Request, res: Response, next: NextFunction) {
   try {
     const clinicId = req.query.clinicId as string | undefined;
     const result = await doctorService.getAllDoctors(clinicId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// ── Assignment endpoints ──
+
+// A clinic assigns itself an existing doctor (self-service, clinic-initiated)
+export async function assignSelfToDoctor(req: Request, res: Response, next: NextFunction) {
+  try {
+    const doctorId = req.params.id as string;
+    const clinic = (req as any).user;
+    const result = await doctorService.assignDoctorToClinic(doctorId, clinic.id);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Admin assigns any doctor to any clinic
+export async function adminAssign(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = assignmentSchema.parse(req.body);
+    const result = await doctorService.assignDoctorToClinic(input.doctorId, input.clinicId);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function adminUnassign(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = assignmentSchema.parse(req.body);
+    const result = await doctorService.unassignDoctorFromClinic(input.doctorId, input.clinicId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getClinics(req: Request, res: Response, next: NextFunction) {
+  try {
+    const doctorId = req.params.id as string;
+    const result = await doctorService.getClinicsForDoctor(doctorId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getDoctorsByClinic(req: Request, res: Response, next: NextFunction) {
+  try {
+    const clinicId = req.params.clinicId as string;
+    const result = await doctorService.getDoctorsForClinic(clinicId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getAssignedDoctor(req: Request, res: Response, next: NextFunction) {
+  try {
+    const clinicId = req.params.clinicId as string;
+    const doctor = await doctorService.getAssignedDoctorForClinic(clinicId);
+    if (!doctor) return res.json({ success: false, error: "No doctor assigned" });
+    res.json({ success: true, doctorId: doctor.id });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function queue(req: Request, res: Response, next: NextFunction) {
+  try {
+    const doctor = (req as any).user;
+    const result = await doctorService.getDoctorQueue(doctor.id);
     res.json(result);
   } catch (err) {
     next(err);

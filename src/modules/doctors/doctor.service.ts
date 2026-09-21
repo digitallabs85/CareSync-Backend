@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import jwt, { SignOptions } from "jsonwebtoken";
-import { eq } from "drizzle-orm";
+import { eq, and, inArray, isNull } from "drizzle-orm";
 import { db } from "../../db";
-import { doctors, doctorSessions, doctorLogs } from "../../db/schema";
+import { doctors, doctorSessions, doctorLogs, doctorClinicAssignments, clinics, vitals, patients, prescriptions, calls } from "../../db/schema";
 import { env } from "../../config/env";
 import type {
   DoctorLoginInput,
@@ -51,6 +51,8 @@ export async function loginDoctor(input: DoctorLoginInput) {
   return { token, doctor: stripPassword(doctor) };
 }
 
+// A clinic registering a doctor now creates the doctor AND an
+// assignment row linking them to that clinic (was: doctors.clinicId).
 export async function registerDoctor(input: DoctorRegisterInput, clinicId: string) {
   const existing = await db.query.doctors.findFirst({
     where: eq(doctors.email, input.email),
@@ -66,8 +68,9 @@ export async function registerDoctor(input: DoctorRegisterInput, clinicId: strin
   const [doctor] = await db.insert(doctors).values({
     ...input,
     password: hashed,
-    clinicId,
   }).returning();
+
+  await db.insert(doctorClinicAssignments).values({ doctorId: doctor.id, clinicId });
 
   const token = jwt.sign(
     { id: doctor.id, role: "doctor", email: doctor.email },
@@ -165,9 +168,130 @@ export async function logoutDoctor(doctorId: string, reason: string) {
   return { success: true };
 }
 
+// clinicId now filters through the assignment table instead of a
+// direct column on doctors.
 export async function getAllDoctors(clinicId?: string) {
   if (clinicId) {
-    return db.query.doctors.findMany({ where: eq(doctors.clinicId, clinicId) });
+    return db.select({ doctor: doctors })
+      .from(doctorClinicAssignments)
+      .innerJoin(doctors, eq(doctors.id, doctorClinicAssignments.doctorId))
+      .where(eq(doctorClinicAssignments.clinicId, clinicId))
+      .then((rows) => rows.map((r) => stripPassword(r.doctor)));
   }
-  return db.query.doctors.findMany();
+  const all = await db.query.doctors.findMany();
+  return all.map(stripPassword);
+}
+
+// ── Doctor ↔ Clinic assignment management ──
+
+export async function assignDoctorToClinic(doctorId: string, clinicId: string) {
+  const doctor = await db.query.doctors.findFirst({ where: eq(doctors.id, doctorId) });
+  if (!doctor) {
+    const err: any = new Error("Doctor not found");
+    err.status = 404;
+    throw err;
+  }
+
+  const clinic = await db.query.clinics.findFirst({ where: eq(clinics.id, clinicId) });
+  if (!clinic) {
+    const err: any = new Error("Clinic not found");
+    err.status = 404;
+    throw err;
+  }
+
+  const existing = await db.query.doctorClinicAssignments.findFirst({
+    where: and(eq(doctorClinicAssignments.doctorId, doctorId), eq(doctorClinicAssignments.clinicId, clinicId)),
+  });
+  if (existing) {
+    const err: any = new Error("Doctor is already assigned to this clinic");
+    err.status = 409;
+    throw err;
+  }
+
+  const [assignment] = await db.insert(doctorClinicAssignments)
+    .values({ doctorId, clinicId })
+    .returning();
+
+  return assignment;
+}
+
+export async function unassignDoctorFromClinic(doctorId: string, clinicId: string) {
+  const [deleted] = await db.delete(doctorClinicAssignments)
+    .where(and(eq(doctorClinicAssignments.doctorId, doctorId), eq(doctorClinicAssignments.clinicId, clinicId)))
+    .returning();
+
+  if (!deleted) {
+    const err: any = new Error("Assignment not found");
+    err.status = 404;
+    throw err;
+  }
+
+  return deleted;
+}
+
+export async function getClinicsForDoctor(doctorId: string) {
+  const rows = await db.select({ clinic: clinics })
+    .from(doctorClinicAssignments)
+    .innerJoin(clinics, eq(clinics.id, doctorClinicAssignments.clinicId))
+    .where(eq(doctorClinicAssignments.doctorId, doctorId));
+  return rows.map((r) => r.clinic);
+}
+
+export async function getDoctorsForClinic(clinicId: string) {
+  const rows = await db.select({ doctor: doctors })
+    .from(doctorClinicAssignments)
+    .innerJoin(doctors, eq(doctors.id, doctorClinicAssignments.doctorId))
+    .where(eq(doctorClinicAssignments.clinicId, clinicId));
+  return rows.map((r) => stripPassword(r.doctor));
+}
+
+// Used by the kiosk flow — first available (online, not on call)
+// doctor assigned to this clinic. No fairness/rotation yet.
+export async function getAssignedDoctorForClinic(clinicId: string) {
+  const rows = await db.select({ doctor: doctors })
+    .from(doctorClinicAssignments)
+    .innerJoin(doctors, eq(doctors.id, doctorClinicAssignments.doctorId))
+    .where(and(
+      eq(doctorClinicAssignments.clinicId, clinicId),
+      eq(doctors.doctorStatus, "online"),
+      eq(doctors.onCall, false),
+    ));
+
+  return rows.length > 0 ? rows[0].doctor : null;
+}
+
+export async function getDoctorQueue(doctorId: string) {
+  const assignedClinics = await db.query.doctorClinicAssignments.findMany({
+    where: eq(doctorClinicAssignments.doctorId, doctorId),
+  });
+  const clinicIds = assignedClinics.map((a) => a.clinicId);
+  if (clinicIds.length === 0) return [];
+
+  const queue = await db
+    .select({
+      vitalsId: vitals.id,
+      patientId: patients.id,
+      patientName: patients.firstName,
+      token: patients.token,
+      clinicId: patients.clinicId,
+      tokenDate: patients.tokenDate,
+      createdAt: vitals.createdAt,
+    })
+    .from(vitals)
+    .innerJoin(patients, eq(vitals.patientId, patients.id))
+    .leftJoin(prescriptions, eq(prescriptions.vitalsId, vitals.id))
+    .leftJoin(
+      calls,
+      and(eq(calls.vitalsId, vitals.id), eq(calls.status, "accepted"))
+    )
+    .where(
+      and(
+        inArray(patients.clinicId, clinicIds),
+        isNull(prescriptions.id),
+        isNull(calls.id)
+      )
+    )
+    .orderBy(patients.token);
+
+  return queue;
 }

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { adminLoginSchema, createClinicSchema } from "./admin.validation";
+import { adminLoginSchema, createClinicSchema, assignmentSchema } from "./admin.validation";
 import { updateStatusSchema } from "./admin.validation";
 import * as adminService from "./admin.service";
 
@@ -23,7 +23,6 @@ export async function createClinic(req: Request, res: Response, next: NextFuncti
     next(err);
   }
 }
-
 
 export async function updateClinicStatus(req: Request, res: Response, next: NextFunction) {
   try {
@@ -70,6 +69,30 @@ export async function getAllDoctors(req: Request, res: Response, next: NextFunct
 export async function getAuditLogs(req: Request, res: Response, next: NextFunction) {
   try {
     const result = await adminService.getAuditLogs();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// ── Doctor ↔ Clinic assignment ──
+
+export async function assignDoctorToClinic(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = assignmentSchema.parse(req.body);
+    const admin = (req as any).user;
+    const result = await adminService.assignDoctorToClinic(input.doctorId, input.clinicId, admin.id, admin.username);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function unassignDoctorFromClinic(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = assignmentSchema.parse(req.body);
+    const admin = (req as any).user;
+    const result = await adminService.unassignDoctorFromClinic(input.doctorId, input.clinicId, admin.id, admin.username);
     res.json(result);
   } catch (err) {
     next(err);

@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { db } from "../../db";
-import { vitals, patients } from "../../db/schema";
+import { vitals, patients, prescriptions, doctors, prescriptionMedicines } from "../../db/schema";
 import type { SaveVitalsInput, UpdateVitalsInput } from "./vitals.validation";
 
 export async function saveVitals(input: SaveVitalsInput) {
@@ -71,4 +71,87 @@ export async function getVitalsByPhone(phone: string) {
     where: (v, { inArray }) => inArray(v.patientId, patientIds),
     orderBy: [desc(vitals.createdAt)],
   });
+}
+
+export async function getPatientByVitalsId(vitalsId: string) {
+  const [row] = await db
+    .select({
+      vitalsId: vitals.id,
+      patientId: patients.id,
+      firstName: patients.firstName,
+      lastName: patients.lastName,
+      token: patients.token,
+      phoneNumber: patients.phoneNumber,
+      dob: patients.dob,
+      gender: patients.gender,
+      mrNumber: patients.mrNumber,
+    })
+    .from(vitals)
+    .innerJoin(patients, eq(vitals.patientId, patients.id))
+    .where(eq(vitals.id, vitalsId));
+  return row ?? null;
+}
+
+export async function getFullReport(vitalsId: string) {
+  const [vitalsRow] = await db.select().from(vitals).where(eq(vitals.id, vitalsId));
+  if (!vitalsRow) {
+    const err: any = new Error("Vitals not found");
+    err.status = 404;
+    throw err;
+  }
+
+  const [patientRow] = await db
+    .select({
+      id: patients.id,
+      firstName: patients.firstName,
+      lastName: patients.lastName,
+      token: patients.token,
+      phoneNumber: patients.phoneNumber,
+      age: patients.age,
+      gender: patients.gender,
+      city: patients.city,
+    })
+    .from(patients)
+    .where(eq(patients.id, vitalsRow.patientId));
+
+  const [prescriptionRow] = await db
+    .select({
+      id: prescriptions.id,
+      diagnosis: prescriptions.diagnosis,
+      hematologicalTest: prescriptions.hematologicalTest,
+      radiologicalTest: prescriptions.radiologicalTest,
+      clinicalNotes: prescriptions.clinicalNotes,
+      createdAt: prescriptions.createdAt,
+      updatedAt: prescriptions.updatedAt,
+      doctorFirstName: doctors.firstName,
+      doctorLastName: doctors.lastName,
+      doctorTitle: doctors.title,
+      doctorSpecializations: doctors.specializations,
+    })
+    .from(prescriptions)
+    .innerJoin(doctors, eq(prescriptions.doctorId, doctors.id))
+    .where(eq(prescriptions.vitalsId, vitalsId));
+
+  let medicines: any[] = [];
+  if (prescriptionRow) {
+    medicines = await db
+      .select()
+      .from(prescriptionMedicines)
+      .where(eq(prescriptionMedicines.prescriptionId, prescriptionRow.id));
+  }
+
+  return {
+    patient: patientRow ?? null,
+    vitals: vitalsRow,
+    prescription: prescriptionRow
+      ? {
+          ...prescriptionRow,
+          doctor: {
+            name: `${prescriptionRow.doctorTitle} ${prescriptionRow.doctorFirstName} ${prescriptionRow.doctorLastName}`,
+            specializations: prescriptionRow.doctorSpecializations,
+          },
+          medicines,
+        }
+      : null,
+  };
 }

@@ -8,6 +8,34 @@
       "when": 1789279231505,
       "tag": "0000_dark_rhino",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789370935510,
+      "tag": "0001_cooing_infant_terrible",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789521694133,
+      "tag": "0002_ancient_stryfe",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789783619723,
+      "tag": "0003_icy_strong_guy",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789807761656,
+      "tag": "0004_ordinary_dormammu",
+      "breakpoints": true
     }
   ]
 }

@@ -42,3 +42,24 @@ export async function historyByPhone(req: Request, res: Response, next: NextFunc
     next(err);
   }
 }
+
+export async function getPatientByVitals(req: Request, res: Response, next: NextFunction) {
+  try {
+    const vitalsId = req.params.vitalsId as string;
+    const result = await vitalsService.getPatientByVitalsId(vitalsId);
+    if (!result) return res.status(404).json({ error: "Not found" });
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getFullReportHandler(req: Request, res: Response, next: NextFunction) {
+  try {
+    const vitalsId = req.params.vitalsId as string;
+    const result = await vitalsService.getFullReport(vitalsId);
+    res.json({ data: result });
+  } catch (err) {
+    next(err);
+  }
+}

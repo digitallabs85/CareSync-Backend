@@ -5,6 +5,8 @@ import {
   alertDoctorSchema,
   acceptCallSchema,
   endCallSchema,
+  doctorDeclineCallSchema,
+  patientDeclineCallSchema,
 } from "./notification.validation";
 import * as notificationService from "./notification.service";
 
@@ -21,7 +23,6 @@ export async function saveFcmToken(req: Request, res: Response, next: NextFuncti
 
 export async function removeFcmToken(req: Request, res: Response, next: NextFunction) {
   try {
-    removeFcmTokenSchema.parse(req.body);
     const doctor = (req as any).user;
     const result = await notificationService.removeDoctorFcmToken(doctor.id);
     res.json(result);
@@ -66,6 +67,27 @@ export async function end(req: Request, res: Response, next: NextFunction) {
     const input = endCallSchema.parse(req.body);
     const user = (req as any).user;
     const result = await notificationService.endCall(input.vitalsId, user.role, input.reason);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function doctorDecline(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = doctorDeclineCallSchema.parse(req.body);
+    const doctor = (req as any).user;
+    const result = await notificationService.doctorDeclineCall(doctor.id, input.vitalsId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function patientDecline(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = patientDeclineCallSchema.parse(req.body);
+    const result = await notificationService.patientDeclineCall(input.vitalsId);
     res.json(result);
   } catch (err) {
     next(err);

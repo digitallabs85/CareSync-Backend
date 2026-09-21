@@ -11,5 +11,7 @@ router.post("/alert-doctor", authMiddleware, requireRole("clinic"), notification
 router.post("/accept-call", authMiddleware, requireRole("doctor"), notificationController.accept);
 router.get("/call-status/:vitalsId", authMiddleware, notificationController.status);
 router.post("/end-call", authMiddleware, notificationController.end);
+router.post("/doctor-decline-call", authMiddleware, requireRole("doctor"), notificationController.doctorDecline);
+router.post("/patient-decline-call", authMiddleware, requireRole("clinic"), notificationController.patientDecline);
 
 export default router;

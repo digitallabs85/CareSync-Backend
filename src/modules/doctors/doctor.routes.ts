@@ -13,5 +13,12 @@ router.patch("/change-password", authMiddleware, requireRole("doctor"), doctorCo
 router.patch("/status", authMiddleware, requireRole("doctor"), doctorController.updateStatus);
 router.post("/logout", authMiddleware, requireRole("doctor"), doctorController.logout);
 router.get("/", authMiddleware, doctorController.getAll);
+router.get("/queue", authMiddleware, requireRole("doctor"), doctorController.queue);
+
+// ── Clinic ↔ Doctor assignment ──
+router.post("/:id/assign-self", authMiddleware, requireRole("clinic"), doctorController.assignSelfToDoctor);
+router.get("/:id/clinics", authMiddleware, doctorController.getClinics);
+router.get("/clinic/:clinicId", authMiddleware, doctorController.getDoctorsByClinic);
+router.get("/clinic/:clinicId/assigned-doctor", authMiddleware, requireRole("clinic"), doctorController.getAssignedDoctor);
 
 export default router;

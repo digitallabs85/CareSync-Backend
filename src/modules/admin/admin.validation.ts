@@ -18,7 +18,12 @@ export const updateStatusSchema = z.object({
   status: z.enum(["Active", "Suspended"]),
 });
 
+export const assignmentSchema = z.object({
+  doctorId: z.string().uuid(),
+  clinicId: z.string().uuid(),
+});
 
+export type AssignmentInput = z.infer<typeof assignmentSchema>;
 export type UpdateStatusInput = z.infer<typeof updateStatusSchema>;
 export type AdminLoginInput = z.infer<typeof adminLoginSchema>;
 export type CreateClinicInput = z.infer<typeof createClinicSchema>;

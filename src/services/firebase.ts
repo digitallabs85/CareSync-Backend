@@ -19,11 +19,25 @@ export async function sendPushNotification(
   data?: Record<string, string>
 ) {
   try {
-    await getMessaging().send({
+    console.log("[sendPushNotification] sending to token:", fcmToken.slice(0, 20) + "...");
+await getMessaging().send({
       token: fcmToken,
       notification: { title, body },
       data,
+      webpush: {
+        notification: {
+          title,
+          body,
+          icon: "/icons/icon-192.png",
+        },
+        fcmOptions: {
+          link: data?.type === "incoming_call"
+            ? `/calls/incoming/${data.vitalsId}?name=${encodeURIComponent(data.patientName || "Patient")}`
+            : "/dashboard",
+        },
+      },
     });
+    console.log("[sendPushNotification] sent successfully");
     return { success: true };
   } catch (err: any) {
     console.error("FCM send error:", err.message);

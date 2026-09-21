@@ -11,7 +11,6 @@ export const savePatientSchema = z.object({
   province: z.string().optional(),
   city: z.string().optional(),
   stAddress: z.string().optional(),
-  languages: z.string().optional(),
   mrNumber: z.string().optional(),
   profilePhoto: z.string().optional(),
   consentAccepted: z.boolean().optional(),
