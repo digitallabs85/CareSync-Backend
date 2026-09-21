@@ -37,3 +37,5 @@ export const env = {
     ? [process.env.CLINIC_URL!, process.env.DOCTOR_URL!]
     : ["http://localhost:3000", "http://localhost:3001"],
 };
+
+console.log("CORS clientUrls:", env.clientUrls)
