@@ -34,6 +34,6 @@ export const env = {
   jwtSecret: requireEnv("JWT_SECRET"),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
   clientUrls: isProduction
-    ? [process.env.CLIENT_URL!]
+    ? [process.env.CLINIC_URL!, process.env.DOCTOR_URL!]
     : ["http://localhost:3000", "http://localhost:3001"],
 };
