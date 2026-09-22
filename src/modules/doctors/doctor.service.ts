@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt, { SignOptions } from "jsonwebtoken";
-import { eq, and, inArray, isNull } from "drizzle-orm";
+import { eq, and, inArray, isNull, sql } from "drizzle-orm";
 import { db } from "../../db";
 import { doctors, doctorSessions, doctorLogs, doctorClinicAssignments, clinics, vitals, patients, prescriptions, calls } from "../../db/schema";
 import { env } from "../../config/env";
@@ -288,7 +288,9 @@ export async function getDoctorQueue(doctorId: string) {
       and(
         inArray(patients.clinicId, clinicIds),
         isNull(prescriptions.id),
-        isNull(calls.id)
+        isNull(calls.id),
+        eq(patients.vitalsRecorded, true),
+        eq(patients.tokenDate, sql`CURRENT_DATE`)
       )
     )
     .orderBy(patients.token);
