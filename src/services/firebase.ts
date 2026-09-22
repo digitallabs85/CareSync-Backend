@@ -19,10 +19,13 @@ export async function sendPushNotification(
   data?: Record<string, string>
 ) {
   try {
-    console.log("[sendPushNotification] sending to token:", fcmToken.slice(0, 20) + "...");
-await getMessaging().send({
+    const isIncomingCall = data?.type === "incoming_call";
+
+    await getMessaging().send({
       token: fcmToken,
-      notification: { title, body },
+      ...(isIncomingCall
+        ? {} // data-only, no auto-display — let the app show its own full-screen notification
+        : { notification: { title, body } }),
       data,
       webpush: {
         notification: {
