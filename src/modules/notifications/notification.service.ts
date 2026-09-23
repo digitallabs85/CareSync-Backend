@@ -4,6 +4,18 @@ import { doctors, calls, vitals, patients } from "../../db/schema";
 import { sendPushNotification } from "../../services/firebase";
 import { END_CALL_REASONS } from "./notification.validation";
 
+async function notifyCancelCall(doctorId: string, vitalsId: string) {
+  const doctor = await db.query.doctors.findFirst({ where: eq(doctors.id, doctorId) });
+  if (doctor?.fcmToken) {
+    await sendPushNotification(
+      doctor.fcmToken,
+      "",
+      "",
+      { vitalsId, type: "cancel_call" }
+    );
+  }
+}
+
 export async function saveDoctorFcmToken(doctorId: string, token: string) {
   await db.update(doctors).set({ fcmToken: token }).where(eq(doctors.id, doctorId));
   return { success: true };
@@ -134,6 +146,10 @@ export async function endCall(vitalsId: string, role: "clinic" | "doctor", reaso
 
   await db.update(doctors).set({ onCall: false }).where(eq(doctors.id, call.doctorId));
 
+  if (isMissedType) {
+    await notifyCancelCall(call.doctorId, vitalsId);
+  }
+
   return updated;
 }
 
@@ -168,5 +184,8 @@ export async function patientDeclineCall(vitalsId: string) {
     .set({ status: "declined_by_patient" })
     .where(eq(calls.id, call.id))
     .returning();
+
+  await notifyCancelCall(call.doctorId, vitalsId);
+
   return updated;
 }
