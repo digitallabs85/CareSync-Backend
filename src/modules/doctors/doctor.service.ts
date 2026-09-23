@@ -48,7 +48,12 @@ export async function loginDoctor(input: DoctorLoginInput) {
 
   await db.insert(doctorSessions).values({ doctorId: doctor.id });
 
-  return { token, doctor: stripPassword(doctor) };
+  const [updated] = await db.update(doctors)
+    .set({ doctorStatus: "offline", onCall: false })
+    .where(eq(doctors.id, doctor.id))
+    .returning();
+
+  return { token, doctor: stripPassword(updated) };
 }
 
 // A clinic registering a doctor now creates the doctor AND an
