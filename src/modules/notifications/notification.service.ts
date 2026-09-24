@@ -126,14 +126,13 @@ export async function endCall(vitalsId: string, role: "clinic" | "doctor", reaso
     throw err;
   }
 
-  // honor the reason as the actual status when it's a valid one;
-  // otherwise (no reason, or a normal hangup) mark completed
   const status = reason && (END_CALL_REASONS as readonly string[]).includes(reason)
     ? reason
     : "completed";
 
   const isPatientSide = role === "clinic";
   const isMissedType = status === "doctor_not_responding";
+  const wasPending = call.status === "pending";
 
   const [updated] = await db.update(calls)
     .set({
@@ -146,7 +145,9 @@ export async function endCall(vitalsId: string, role: "clinic" | "doctor", reaso
 
   await db.update(doctors).set({ onCall: false }).where(eq(doctors.id, call.doctorId));
 
-  if (isMissedType) {
+  // Any patient/clinic-side end while the call was still ringing must stop the doctor's ringtone —
+  // not just the missed-call case.
+  if (isPatientSide && wasPending) {
     await notifyCancelCall(call.doctorId, vitalsId);
   }
 
