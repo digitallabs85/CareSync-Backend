@@ -1,6 +1,6 @@
-import { eq, and, sql, desc } from "drizzle-orm";
+import { eq, and, sql, desc, isNull } from "drizzle-orm";
 import { db } from "../../db";
-import { patients, dailyTokenCounters, globalCounters, vitals } from "../../db/schema";
+import { patients, dailyTokenCounters, globalCounters, vitals, prescriptions } from "../../db/schema";
 import type { SavePatientInput } from "./patient.validation";
 
 function todayDate() {
@@ -149,10 +149,14 @@ export async function getTodayPatients(clinicId: string) {
         })
         .from(patients)
         .leftJoin(vitals, eq(vitals.patientId, patients.id))
-        .where(and(eq(patients.clinicId, clinicId), eq(patients.tokenDate, today)))
+        .leftJoin(prescriptions, eq(prescriptions.vitalsId, vitals.id))
+        .where(and(
+            eq(patients.clinicId, clinicId),
+            eq(patients.tokenDate, today),
+            isNull(prescriptions.id) // no prescription written for this vitals yet
+        ))
         .orderBy(patients.token, desc(vitals.createdAt));
 
-    // dedupe: keep first (latest vitals) row per patient
     const seen = new Set<string>();
     return rows.filter((r) => {
         if (seen.has(r.id)) return false;
