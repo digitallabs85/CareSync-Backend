@@ -146,15 +146,12 @@ export async function getTodayPatients(clinicId: string) {
             mrNumber: patients.mrNumber,
             vitalsRecorded: patients.vitalsRecorded,
             vitalsId: vitals.id,
+            prescriptionId: prescriptions.id, // add this
         })
         .from(patients)
         .leftJoin(vitals, eq(vitals.patientId, patients.id))
         .leftJoin(prescriptions, eq(prescriptions.vitalsId, vitals.id))
-        .where(and(
-            eq(patients.clinicId, clinicId),
-            eq(patients.tokenDate, today),
-            isNull(prescriptions.id) // no prescription written for this vitals yet
-        ))
+        .where(and(eq(patients.clinicId, clinicId), eq(patients.tokenDate, today)))
         .orderBy(patients.token, desc(vitals.createdAt));
 
     const seen = new Set<string>();
