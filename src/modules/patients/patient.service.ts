@@ -1,6 +1,6 @@
 import { eq, and, sql, desc, isNull } from "drizzle-orm";
 import { db } from "../../db";
-import { patients, dailyTokenCounters, globalCounters, vitals, prescriptions } from "../../db/schema";
+import { patients, dailyTokenCounters, globalCounters, vitals, prescriptions, doctorClinicAssignments } from "../../db/schema";
 import type { SavePatientInput } from "./patient.validation";
 
 function todayDate() {

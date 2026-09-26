@@ -10,4 +10,5 @@ router.get("/verify-token/:token", authMiddleware, patientController.verify);
 router.get("/today-token/:phone", authMiddleware, patientController.todayToken);
 router.get("/today", authMiddleware, patientController.getToday);
 
+
 export default router;

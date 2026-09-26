@@ -171,3 +171,13 @@ export async function queue(req: Request, res: Response, next: NextFunction) {
     next(err);
   }
 }
+
+export async function getCompletedToday(req: Request, res: Response, next: NextFunction) {
+  try {
+    const doctor = (req as any).user;
+    const result = await doctorService.getCompletedToday(doctor.id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}

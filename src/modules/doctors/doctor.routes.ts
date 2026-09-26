@@ -14,6 +14,7 @@ router.patch("/status", authMiddleware, requireRole("doctor"), doctorController.
 router.post("/logout", authMiddleware, requireRole("doctor"), doctorController.logout);
 router.get("/", authMiddleware, doctorController.getAll);
 router.get("/queue", authMiddleware, requireRole("doctor"), doctorController.queue);
+router.get("/completed-today", authMiddleware, requireRole("doctor"), doctorController.getCompletedToday);
 
 // ── Clinic ↔ Doctor assignment ──
 router.post("/:id/assign-self", authMiddleware, requireRole("clinic"), doctorController.assignSelfToDoctor);

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt, { SignOptions } from "jsonwebtoken";
-import { eq, and, inArray, isNull, sql } from "drizzle-orm";
+import { eq, and, inArray, isNull, sql, desc } from "drizzle-orm";
 import { db } from "../../db";
 import { doctors, doctorSessions, doctorLogs, doctorClinicAssignments, clinics, vitals, patients, prescriptions, calls } from "../../db/schema";
 import { env } from "../../config/env";
@@ -15,6 +15,10 @@ import type {
 function stripPassword(doctor: any) {
   const { password, ...safe } = doctor;
   return safe;
+}
+
+function todayDate() {
+    return new Date().toISOString().split("T")[0];
 }
 
 export async function loginDoctor(input: DoctorLoginInput) {
@@ -301,4 +305,30 @@ export async function getDoctorQueue(doctorId: string) {
     .orderBy(patients.token);
 
   return queue;
+}
+
+export async function getCompletedToday(doctorId: string) {
+  const today = todayDate();
+
+  const rows = await db
+    .select({
+      vitalsId: vitals.id,
+      patientId: patients.id,
+      patientName: sql<string>`${patients.firstName} || ' ' || ${patients.lastName}`, // or however getQueue builds patientName
+      token: patients.token,
+      clinicId: patients.clinicId,
+      tokenDate: patients.tokenDate,
+      createdAt: vitals.createdAt,
+    })
+    .from(vitals)
+    .innerJoin(patients, eq(patients.id, vitals.patientId))
+    .innerJoin(prescriptions, eq(prescriptions.vitalsId, vitals.id)) // inner join = must exist
+    .innerJoin(doctorClinicAssignments, eq(doctorClinicAssignments.clinicId, patients.clinicId))
+    .where(and(
+      eq(doctorClinicAssignments.doctorId, doctorId),
+      eq(patients.tokenDate, today)
+    ))
+    .orderBy(desc(vitals.createdAt));
+
+  return rows;
 }
