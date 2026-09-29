@@ -58,6 +58,7 @@ export async function getPrescriptionById(prescriptionId: string) {
 export async function getPrescriptionByVitalsId(vitalsId: string) {
   const prescription = await db.query.prescriptions.findFirst({
     where: eq(prescriptions.vitalsId, vitalsId),
+    orderBy: [desc(prescriptions.createdAt)],
   });
   if (!prescription) {
     const err: any = new Error("Prescription not found");
