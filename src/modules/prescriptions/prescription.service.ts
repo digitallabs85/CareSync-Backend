@@ -94,9 +94,12 @@ export async function searchPrescriptions(type: 'name' | 'token' | 'mrNumber', v
   }
   if (!patientMatches.length) return [];
 
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+
   const patientIds = patientMatches.map(p => p.id);
   const rxList = await db.query.prescriptions.findMany({
-    where: inArray(prescriptions.patientId, patientIds),
+    where: and(inArray(prescriptions.patientId, patientIds), gte(prescriptions.createdAt, startOfDay)),
     orderBy: [desc(prescriptions.createdAt)],
   });
 
