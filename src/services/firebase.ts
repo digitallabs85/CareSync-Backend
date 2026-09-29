@@ -24,9 +24,15 @@ export async function sendPushNotification(
     await getMessaging().send({
       token: fcmToken,
       ...(isIncomingCall
-        ? {} // data-only, no auto-display — let the app show its own full-screen notification
+        ? {}
         : { notification: { title, body } }),
       data,
+      android: {
+        priority: "high",
+        ...(isIncomingCall && {
+          ttl: 30000, // 30s — don't let a stale call ring later
+        }),
+      },
       webpush: {
         notification: {
           title,
