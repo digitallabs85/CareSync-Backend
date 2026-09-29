@@ -18,7 +18,7 @@ function stripPassword(doctor: any) {
 }
 
 function todayDate() {
-    return new Date().toISOString().split("T")[0];
+  return new Date().toISOString().split("T")[0];
 }
 
 export async function loginDoctor(input: DoctorLoginInput) {
@@ -314,7 +314,7 @@ export async function getCompletedToday(doctorId: string) {
     .select({
       vitalsId: vitals.id,
       patientId: patients.id,
-      patientName: sql<string>`${patients.firstName} || ' ' || ${patients.lastName}`, // or however getQueue builds patientName
+      patientName: sql<string>`${patients.firstName} || ' ' || ${patients.lastName}`,
       token: patients.token,
       clinicId: patients.clinicId,
       tokenDate: patients.tokenDate,
@@ -322,7 +322,7 @@ export async function getCompletedToday(doctorId: string) {
     })
     .from(vitals)
     .innerJoin(patients, eq(patients.id, vitals.patientId))
-    .innerJoin(prescriptions, eq(prescriptions.vitalsId, vitals.id)) // inner join = must exist
+    .innerJoin(prescriptions, eq(prescriptions.vitalsId, vitals.id))
     .innerJoin(doctorClinicAssignments, eq(doctorClinicAssignments.clinicId, patients.clinicId))
     .where(and(
       eq(doctorClinicAssignments.doctorId, doctorId),
@@ -330,5 +330,10 @@ export async function getCompletedToday(doctorId: string) {
     ))
     .orderBy(desc(vitals.createdAt));
 
-  return rows;
+  const seen = new Set<string>();
+  return rows.filter(r => {
+    if (seen.has(r.patientId)) return false;
+    seen.add(r.patientId);
+    return true;
+  });
 }
