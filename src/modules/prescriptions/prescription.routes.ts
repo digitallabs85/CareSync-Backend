@@ -9,5 +9,6 @@ router.post("/", authMiddleware, requireRole("doctor"), prescriptionController.s
 router.get("/today", authMiddleware, prescriptionController.getTodayAll);
 router.get("/by-vitals/:vitalsId", authMiddleware, prescriptionController.getByVitalsId);
 router.get("/:id", authMiddleware, prescriptionController.getById);
+router.get("/search", authMiddleware, prescriptionController.searchPrescriptionHandler);
 
 export default router;

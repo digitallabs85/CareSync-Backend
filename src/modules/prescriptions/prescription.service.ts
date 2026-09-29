@@ -1,4 +1,4 @@
-import { eq, and, gte, desc } from "drizzle-orm";
+import { eq, and, gte, desc, inArray, ilike, or } from "drizzle-orm";
 import { db } from "../../db";
 import { prescriptions, prescriptionMedicines, patients } from "../../db/schema";
 import type { SavePrescriptionInput } from "./prescription.validation";
@@ -79,4 +79,35 @@ export async function getAllPrescriptionsToday(doctorId?: string) {
     where: conditions,
     orderBy: [desc(prescriptions.createdAt)],
   });
+}
+
+export async function searchPrescriptions(type: 'name' | 'token' | 'mrNumber', value: string) {
+  let patientMatches;
+  if (type === 'mrNumber') {
+    patientMatches = await db.query.patients.findMany({ where: eq(patients.mrNumber, value) });
+  } else if (type === 'token') {
+    patientMatches = await db.query.patients.findMany({ where: eq(patients.token, value) });
+  } else {
+    patientMatches = await db.query.patients.findMany({
+      where: or(ilike(patients.firstName, `%${value}%`), ilike(patients.lastName, `%${value}%`)),
+    });
+  }
+  if (!patientMatches.length) return [];
+
+  const patientIds = patientMatches.map(p => p.id);
+  const rxList = await db.query.prescriptions.findMany({
+    where: inArray(prescriptions.patientId, patientIds),
+    orderBy: [desc(prescriptions.createdAt)],
+  });
+
+  const rxIds = rxList.map(r => r.id);
+  const meds = rxIds.length
+    ? await db.query.prescriptionMedicines.findMany({ where: inArray(prescriptionMedicines.prescriptionId, rxIds) })
+    : [];
+
+  return rxList.map(rx => ({
+    ...rx,
+    patient: patientMatches.find(p => p.id === rx.patientId),
+    medicines: meds.filter(m => m.prescriptionId === rx.id),
+  }));
 }

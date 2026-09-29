@@ -42,3 +42,12 @@ export async function getTodayAll(req: Request, res: Response, next: NextFunctio
     next(err);
   }
 }
+
+export async function searchPrescriptionHandler(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { type, value } = req.query as { type: string; value: string };
+    if (!type || !value) return res.status(400).json({ error: "type and value are required" });
+    const result = await prescriptionService.searchPrescriptions(type as any, value);
+    res.json(result);
+  } catch (err) { next(err); }
+}
