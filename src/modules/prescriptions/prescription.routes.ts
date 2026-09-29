@@ -7,8 +7,8 @@ const router = Router();
 
 router.post("/", authMiddleware, requireRole("doctor"), prescriptionController.save);
 router.get("/today", authMiddleware, prescriptionController.getTodayAll);
+router.get("/search", authMiddleware, prescriptionController.searchPrescriptionHandler);
 router.get("/by-vitals/:vitalsId", authMiddleware, prescriptionController.getByVitalsId);
 router.get("/:id", authMiddleware, prescriptionController.getById);
-router.get("/search", authMiddleware, prescriptionController.searchPrescriptionHandler);
 
 export default router;
