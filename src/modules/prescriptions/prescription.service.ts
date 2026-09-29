@@ -75,10 +75,24 @@ export async function getAllPrescriptionsToday(doctorId?: string) {
     ? and(gte(prescriptions.createdAt, startOfDay), eq(prescriptions.doctorId, doctorId))
     : gte(prescriptions.createdAt, startOfDay);
 
-  return db.query.prescriptions.findMany({
+  const rxList = await db.query.prescriptions.findMany({
     where: conditions,
     orderBy: [desc(prescriptions.createdAt)],
   });
+
+  const patientIds = [...new Set(rxList.map(r => r.patientId))];
+  const rxIds = rxList.map(r => r.id);
+
+  const [patientRows, meds] = await Promise.all([
+    patientIds.length ? db.query.patients.findMany({ where: inArray(patients.id, patientIds) }) : [],
+    rxIds.length ? db.query.prescriptionMedicines.findMany({ where: inArray(prescriptionMedicines.prescriptionId, rxIds) }) : [],
+  ]);
+
+  return rxList.map(rx => ({
+    ...rx,
+    patient: patientRows.find(p => p.id === rx.patientId),
+    medicines: meds.filter(m => m.prescriptionId === rx.id),
+  }));
 }
 
 export async function searchPrescriptions(type: 'name' | 'token' | 'mrNumber', value: string) {
