@@ -20,7 +20,23 @@ export const doctorRegisterSchema = z.object({
   city: z.string().optional(),
 });
 
-export const updateDoctorSchema = doctorRegisterSchema.partial().omit({ password: true });
+// export const updateDoctorSchema = doctorRegisterSchema.partial().omit({ password: true });
+export const updateDoctorSchema = z
+  .object({
+    title: z.string().min(1).max(20),
+    firstName: z.string().min(1),
+    lastName: z.string().min(1),
+    phone: z.string().max(20).nullable(),
+    gender: z.string().nullable(),
+    pmdcNumber: z.string().nullable(),
+    experience: z.number().int().min(0).max(80),
+    city: z.string().nullable(),
+    specializations: z.array(z.string().min(1)),
+    qualifications: z.array(z.string().min(1)),
+    photo: z.string().url().startsWith("https://res.cloudinary.com/").nullable(),
+  })
+  .partial()
+  .strict();
 
 export const changePasswordSchema = z.object({
   oldPassword: z.string().min(1),
