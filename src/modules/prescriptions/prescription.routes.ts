@@ -6,6 +6,7 @@ import { requireRole } from "../../middleware/requireRole.middleware";
 const router = Router();
 
 router.post("/", authMiddleware, requireRole("doctor"), prescriptionController.save);
+router.get("/form-data", authMiddleware, prescriptionController.getFormData);
 router.get("/today", authMiddleware, prescriptionController.getTodayAll);
 router.get("/search", authMiddleware, prescriptionController.searchPrescriptionHandler);
 router.get("/by-vitals/:vitalsId", authMiddleware, prescriptionController.getByVitalsId);

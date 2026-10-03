@@ -51,3 +51,13 @@ export async function searchPrescriptionHandler(req: Request, res: Response, nex
     res.json(result);
   } catch (err) { next(err); }
 }
+
+export async function getFormData(req: Request, res: Response, next: NextFunction) {
+  try {
+    const vitalsId = typeof req.query.vitalsId === "string" ? req.query.vitalsId : undefined;
+    const result = await prescriptionService.getPrescriptionFormData(vitalsId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}

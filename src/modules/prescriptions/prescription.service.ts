@@ -1,6 +1,6 @@
 import { eq, and, gte, desc, inArray, ilike, or } from "drizzle-orm";
 import { db } from "../../db";
-import { prescriptions, prescriptionMedicines, patients } from "../../db/schema";
+import { prescriptions, prescriptionMedicines, patients, medicines, catalogItems } from "../../db/schema";
 import type { SavePrescriptionInput } from "./prescription.validation";
 
 export async function savePrescription(input: SavePrescriptionInput, doctorId: string) {
@@ -128,4 +128,35 @@ export async function searchPrescriptions(type: 'name' | 'token' | 'mrNumber', v
     patient: patientMatches.find(p => p.id === rx.patientId),
     medicines: meds.filter(m => m.prescriptionId === rx.id),
   }));
+}
+
+export async function getPrescriptionFormData(vitalsId?: string) {
+  const [meds, items, prescription] = await Promise.all([
+    db.select({ name: medicines.name })
+      .from(medicines)
+      .where(eq(medicines.isActive, true))
+      .orderBy(medicines.priority, medicines.name),
+    db.select({ type: catalogItems.type, name: catalogItems.name })
+      .from(catalogItems)
+      .where(eq(catalogItems.isActive, true))
+      .orderBy(catalogItems.sortOrder, catalogItems.name),
+    vitalsId
+      ? getPrescriptionByVitalsId(vitalsId).catch((e: any) => {
+        if (e.status === 404) return null; // no prescription yet = normal
+        throw e;
+      })
+      : Promise.resolve(null),
+  ]);
+
+  const byType = (t: string) => items.filter(i => i.type === t).map(i => i.name);
+
+  return {
+    catalog: {
+      medicines: meds.map(m => m.name),
+      diagnoses: byType('diagnosis'),
+      hematological: byType('hematological'),
+      radiological: byType('radiological'),
+    },
+    prescription, // null if none
+  };
 }

@@ -1,5 +1,5 @@
 // src/db/schema.ts
-import { pgTable, text, timestamp, uuid, varchar, integer, numeric, boolean, jsonb, uniqueIndex, date } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid, varchar, integer, numeric, boolean, jsonb, uniqueIndex, date, serial, pgEnum } from "drizzle-orm/pg-core";
 
 // ────────────────────────────────────────────────────────────
 // ADMIN
@@ -280,4 +280,23 @@ export const globalCounters = pgTable("global_counters", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 50 }).notNull().unique(),
   counter: integer("counter").notNull().default(0),
+});
+
+export const catalogTypeEnum = pgEnum('catalog_type', ['diagnosis', 'hematological', 'radiological']);
+
+export const catalogItems = pgTable('catalog_items', {
+  id: serial('id').primaryKey(),
+  type: catalogTypeEnum('type').notNull(),
+  name: text('name').notNull(),
+  sortOrder: integer('sort_order').default(0).notNull(),
+  isActive: boolean('is_active').default(true).notNull(),
+}, (t) => ({
+  uniq: uniqueIndex('catalog_type_name_uniq').on(t.type, t.name),
+}));
+
+export const medicines = pgTable('medicines', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull().unique(),
+  isActive: boolean('is_active').default(true).notNull(),
+  priority: integer('priority').default(9999).notNull(),
 });

@@ -53,28 +53,30 @@
 // });
 
 
-import bcrypt from "bcryptjs";
-import { db } from "./index";
-import { clinics } from "./schema";
+// import bcrypt from "bcryptjs";
+// import { db } from "./index";
+// import { clinics } from "./schema";
 
-async function seedClinic() {
-  const hashed = await bcrypt.hash("clinic123", 10);
-  const [clinic] = await db.insert(clinics).values({
-    username: "testclinic2",
-    password: hashed,
-    name: "Test Clinic 2",
-    clinicCode: "TC002",
-    location: "Pilot",
-    country: "Pakistan",
-    city: "Hyderabad",
-    province: "Sindh",
-  }).returning();
+// async function seedClinic() {
+//   const hashed = await bcrypt.hash("clinic123", 10);
+//   const [clinic] = await db.insert(clinics).values({
+//     username: "testclinic2",
+//     password: hashed,
+//     name: "Test Clinic 2",
+//     clinicCode: "TC002",
+//     location: "Pilot",
+//     country: "Pakistan",
+//     city: "Hyderabad",
+//     province: "Sindh",
+//   }).returning();
 
-  console.log("Clinic created:", clinic.username, clinic.id);
-  process.exit(0);
-}
+//   console.log("Clinic created:", clinic.username, clinic.id);
+//   process.exit(0);
+// }
 
-seedClinic().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// seedClinic().catch((err) => {
+//   console.error(err);
+//   process.exit(1);
+// });
+
+

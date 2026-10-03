@@ -1,0 +1,1 @@
+ALTER TABLE "medicines" ADD COLUMN "priority" integer DEFAULT 9999 NOT NULL;
