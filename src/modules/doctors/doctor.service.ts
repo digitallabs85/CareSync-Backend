@@ -281,6 +281,8 @@ export async function getDoctorQueue(doctorId: string) {
       vitalsId: vitals.id,
       patientId: patients.id,
       patientName: patients.firstName,
+      phone: patients.phoneNumber,          // add
+      mrNumber: patients.mrNumber,    // add
       token: patients.token,
       clinicId: patients.clinicId,
       tokenDate: patients.tokenDate,
@@ -311,10 +313,13 @@ export async function getCompletedToday(doctorId: string) {
   const today = todayDate();
 
   const rows = await db
+    // getCompletedToday
     .select({
       vitalsId: vitals.id,
       patientId: patients.id,
       patientName: sql<string>`${patients.firstName} || ' ' || ${patients.lastName}`,
+      phone: patients.phoneNumber,          // add
+      mrNumber: patients.mrNumber,    // add
       token: patients.token,
       clinicId: patients.clinicId,
       tokenDate: patients.tokenDate,
