@@ -1,0 +1,79 @@
+backend/
+├── .env
+├── .gitignore
+├── api/
+│   └── index.ts
+├── backend.xml
+├── caresync-9765b-firebase-adminsdk-fbsvc-48f6940b5e.json
+├── drizzle.config.ts
+├── message.ts
+├── package-lock.json
+├── package.json
+├── repomix-output.xml
+├── src/
+│   ├── app.ts
+│   ├── architecture/
+│   │   └── folderStructure.txt
+│   ├── config/
+│   │   └── env.ts
+│   ├── db/
+│   │   ├── index.ts
+│   │   ├── schema.ts
+│   │   ├── seed-data.ts
+│   │   ├── seed.ts
+│   │   └── seedAccount.ts
+│   ├── middleware/
+│   │   ├── auth.middleware.ts
+│   │   ├── errorHandler.middleware.ts
+│   │   └── requireRole.middleware.ts
+│   ├── modules/
+│   │   ├── admin/
+│   │   │   ├── admin.controller.ts
+│   │   │   ├── admin.routes.ts
+│   │   │   ├── admin.service.ts
+│   │   │   └── admin.validation.ts
+│   │   ├── auth/
+│   │   │   ├── auth.controller.ts
+│   │   │   ├── auth.routes.ts
+│   │   │   ├── auth.service.ts
+│   │   │   └── auth.validation.ts
+│   │   ├── consults/
+│   │   │   ├── consult.controller.ts
+│   │   │   ├── consult.routes.ts
+│   │   │   └── consult.service.ts
+│   │   ├── cron/
+│   │   │   └── cron.routes.ts
+│   │   ├── doctors/
+│   │   │   ├── doctor.controller.ts
+│   │   │   ├── doctor.routes.ts
+│   │   │   ├── doctor.service.ts
+│   │   │   └── doctor.validation.ts
+│   │   ├── notifications/
+│   │   │   ├── notification.controller.ts
+│   │   │   ├── notification.routes.ts
+│   │   │   ├── notification.service.ts
+│   │   │   └── notification.validation.ts
+│   │   ├── patients/
+│   │   │   ├── patient.controller.ts
+│   │   │   ├── patient.routes.ts
+│   │   │   ├── patient.service.ts
+│   │   │   └── patient.validation.ts
+│   │   ├── prescriptions/
+│   │   │   ├── prescription.controller.ts
+│   │   │   ├── prescription.routes.ts
+│   │   │   ├── prescription.service.ts
+│   │   │   └── prescription.validation.ts
+│   │   └── vitals/
+│   │       ├── vitals.controller.ts
+│   │       ├── vitals.routes.ts
+│   │       ├── vitals.service.ts
+│   │       └── vitals.validation.ts
+│   ├── routes/
+│   │   └── index.ts
+│   ├── server.ts
+│   └── services/
+│       ├── email.ts
+│       ├── firebase.ts
+│       └── test-email.js
+├── tsconfig.json
+└── vercel.json
