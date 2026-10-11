@@ -46,7 +46,7 @@ export const env = {
     : requireEnv("DATABASE_URL"),
   jwtSecret,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
-  // Admin sessions are deliberately short-lived (clinic/doctor tokens keep JWT_EXPIRES_IN).
+  // Admin sessions aredeliberately short-lived (clinic/doctor tokens keep JWT_EXPIRES_IN).
   adminJwtExpiresIn: process.env.ADMIN_JWT_EXPIRES_IN || "8h",
   adminProxySecret,
   clientUrls: isProduction
