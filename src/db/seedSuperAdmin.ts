@@ -2,7 +2,7 @@
 //
 //   SUPER_ADMIN_USERNAME=owner SUPER_ADMIN_PASSWORD='Str0ng!Passphrase#2026' npm run db:seedSuperAdmin
 //   (production: npm run db:seedSuperAdmin:prod with the same variables)
-//
+
 // Credentials come from the command line, never from the repo.
 import bcrypt from "bcryptjs";
 import { eq, sql } from "drizzle-orm";
