@@ -1,9 +1,11 @@
 // src/db/schema.ts
-import { pgTable, text, timestamp, uuid, varchar, integer, numeric, boolean, jsonb, uniqueIndex, date, serial, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid, varchar, integer, numeric, boolean, jsonb, uniqueIndex, index, primaryKey, date, serial, pgEnum } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 // ────────────────────────────────────────────────────────────
 // ADMIN
 // Platform-level admins (not clinic staff, not doctors).
+// role: "super_admin" | "admin" | "support"  (enforced in code, see admin.permissions.ts)
 // ────────────────────────────────────────────────────────────
 export const admins = pgTable("admins", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -13,7 +15,12 @@ export const admins = pgTable("admins", {
   password: text("password").notNull(),
   role: text("role").notNull().default("admin"),
   status: text("status").notNull().default("Active"),
+  // Bumped on logout / password change / password reset. Tokens carry the
+  // version they were issued with, so bumping it revokes every older token.
+  tokenVersion: integer("token_version").notNull().default(0),
+  lastLoginAt: timestamp("last_login_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
   createdByAdminId: uuid("created_by_admin_id"),
   createdByName: text("created_by_name"),
 });
@@ -34,7 +41,22 @@ export const auditLogs = pgTable("audit_logs", {
   changes: jsonb("changes"),
   ipAddress: text("ip_address"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-});
+}, (t) => [
+  index("audit_created_at_idx").on(t.createdAt),
+  index("audit_action_created_idx").on(t.action, t.createdAt),
+  index("audit_description_trgm_idx").using("gin", t.description.op("gin_trgm_ops")),
+]);
+
+// Fixed-window counters used by the rate limiter / brute-force protection.
+// Lives in Postgres because serverless instances (Vercel) share no memory.
+export const rateLimits = pgTable("rate_limits", {
+  key: text("key").notNull(),
+  windowStart: timestamp("window_start", { withTimezone: true }).notNull(),
+  count: integer("count").notNull().default(0),
+}, (t) => [
+  primaryKey({ columns: [t.key, t.windowStart] }),
+  index("rate_limits_window_idx").on(t.windowStart),
+]);
 
 // ────────────────────────────────────────────────────────────
 // CLINICS
@@ -56,7 +78,7 @@ export const clinics = pgTable("clinics", {
   createdByAdminId: uuid("created_by_admin_id"),
   createdByName: text("created_by_name"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  isBifurcated: boolean("is_bifurcated").notNull().default(false), 
+  isBifurcated: boolean("is_bifurcated").notNull().default(false),
 
   // merged from pricing + page_permissions (1:1 tables, no reason to split)
   priceVitals: integer("price_vitals").notNull().default(0),
@@ -68,7 +90,15 @@ export const clinics = pgTable("clinics", {
   pagesVitals: boolean("pages_vitals").notNull().default(true),
   pagesOnlineConsultation: boolean("pages_online_consultation").notNull().default(true),
   pagesPharmacy: boolean("pages_pharmacy").notNull().default(true),
-});
+}, (t) => [
+  // trigram indexes make `ILIKE '%term%'` search fast (needs the pg_trgm extension)
+  index("clinics_name_trgm_idx").using("gin", t.name.op("gin_trgm_ops")),
+  index("clinics_username_trgm_idx").using("gin", t.username.op("gin_trgm_ops")),
+  index("clinics_city_trgm_idx").using("gin", t.city.op("gin_trgm_ops")),
+  index("clinics_code_trgm_idx").using("gin", t.clinicCode.op("gin_trgm_ops")),
+  index("clinics_status_idx").on(t.status),
+  index("clinics_created_at_idx").on(t.createdAt),
+]);
 
 // ────────────────────────────────────────────────────────────
 // PATIENTS
@@ -176,7 +206,15 @@ export const doctors = pgTable("doctors", {
   fcmToken: text("fcm_token"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
-});
+}, (t) => [
+  // Full-name search: the query in admin.service.ts uses this exact expression.
+  index("doctors_fullname_trgm_idx").using("gin", sql`(${t.firstName} || ' ' || ${t.lastName}) gin_trgm_ops`),
+  index("doctors_email_trgm_idx").using("gin", t.email.op("gin_trgm_ops")),
+  index("doctors_city_trgm_idx").using("gin", t.city.op("gin_trgm_ops")),
+  index("doctors_pmdc_trgm_idx").using("gin", t.pmdcNumber.op("gin_trgm_ops")),
+  index("doctors_status_idx").on(t.status),
+  index("doctors_created_at_idx").on(t.createdAt),
+]);
 
 // Many-to-many link between doctors and clinics.
 // A doctor can be assigned to any number of clinics; a clinic can
@@ -190,6 +228,7 @@ export const doctorClinicAssignments = pgTable("doctor_clinic_assignments", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 }, (t) => ({
   doctorClinicUnique: uniqueIndex("doctor_clinic_unique_idx").on(t.doctorId, t.clinicId),
+  clinicIdx: index("doctor_clinic_clinic_idx").on(t.clinicId),
 }));
 
 // Login/logout history per doctor (for shift tracking / audit).

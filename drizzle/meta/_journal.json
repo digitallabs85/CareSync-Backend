@@ -50,6 +50,13 @@
       "when": 1791020195408,
       "tag": "0006_overrated_hulk",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1791729435806,
+      "tag": "0007_burly_guardsmen",
+      "breakpoints": true
     }
   ]
 }

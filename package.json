@@ -16,7 +16,9 @@
     "db:seed": "tsx src/db/seed.ts",
     "db:seed:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seed.ts",
     "db:seedAccount": "tsx src/db/seedAccount.ts",
-    "db:seedAccount:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seedAccount.ts"
+    "db:seedAccount:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seedAccount.ts",
+    "db:seedSuperAdmin": "tsx src/db/seedSuperAdmin.ts",
+    "db:seedSuperAdmin:prod": "cross-env DEPLOY_TARGET=production tsx src/db/seedSuperAdmin.ts"
   },
   "keywords": [],
   "author": "",
